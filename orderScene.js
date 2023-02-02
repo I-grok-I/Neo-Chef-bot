@@ -9,7 +9,8 @@ const startWizard = new Composer()
 startWizard.on('callback_query', async (ctx) => {
     ctx.session.data = {}
     await ctx.reply('Выберите способ достаки', Markup.keyboard([
-        ["🚗Доставка", "🙋‍♂️Самовывоз"]
+        ['🚗Доставка', '🙋‍♂️Самовывоз'],
+        ['Выйти в меню']
     ]).oneTime().resize())
      return ctx.wizard.next()
 })
@@ -17,9 +18,31 @@ startWizard.on('callback_query', async (ctx) => {
 //шаг доставки. Тут сохраняю в orderType прошлое сообщение (способ доставки) и спрашиваю имя.
 const orderType = new Composer()
 orderType.on('text', async (ctx) => {
-    ctx.session.data.orderType = ctx.message.text
-    await ctx.reply('Напишите имя')
+    if (ctx.message.text === '🚗Доставка' || ctx.message.text === '🙋‍♂️Самовывоз') {
+        ctx.session.data.orderType = ctx.message.text
+    await ctx.reply('Напишите имя', Markup.keyboard([
+        ['Выйти в меню']
+    ]).oneTime().resize())
     return ctx.wizard.next()
+    } else if (ctx.message.text == 'Выйти в меню') {
+        await ctx.replyWithHTML(
+`<b>Добро пожаловать в Нео Шеф!
+ Заказ еды в пару кликов</b>
+◽Автоматическое начисление бонусов в размере 3% от суммы
+◽За покупку свыше 300₽ - скидка 3%, свыше 500₽ - 5%
+◽Бесплатная доставка по городу от 500₽`, 
+                Markup.keyboard(
+                    [
+                        ['Меню'],['Корзина']
+                    ]
+                ).resize())
+        return ctx.scene.leave()
+    } else {
+        await ctx.reply('Выберите способ достаки', Markup.keyboard([
+            ['🚗Доставка', '🙋‍♂️Самовывоз']
+        ]).oneTime().resize())
+        
+    }
 })
 
 
@@ -27,7 +50,20 @@ orderType.on('text', async (ctx) => {
 //если всё норм, сохраняю сообщение в session.data.name и перехожу дальше
 const firstName = new Composer()
 firstName.on('text', async (ctx) => {
-    if (ctx.message.text.length<3 || ctx.message.text.match(/\P{L}/giu)) {
+    if (ctx.message.text == 'Выйти в меню') {
+        await ctx.replyWithHTML(
+`<b>Добро пожаловать в Нео Шеф!
+ Заказ еды в пару кликов</b>
+◽Автоматическое начисление бонусов в размере 3% от суммы
+◽За покупку свыше 300₽ - скидка 3%, свыше 500₽ - 5%
+◽Бесплатная доставка по городу от 500₽`, 
+                Markup.keyboard(
+                    [
+                        ['Меню'],['Корзина']
+                    ]
+                ).resize())
+        return ctx.scene.leave()
+    }else if (ctx.message.text.length<3 || ctx.message.text.match(/\P{L}/giu)) {
         ctx.reply('Введите имя!')
     } else {
         ctx.session.data.name = ctx.message.text
@@ -38,7 +74,7 @@ firstName.on('text', async (ctx) => {
                  text: "Отправить номер телефона 📞",
                  request_contact: true
               }
-           ]
+           ], ['Выйти в меню']
         ]).oneTime().resize());
         return ctx.wizard.next()
     }
@@ -49,7 +85,20 @@ firstName.on('text', async (ctx) => {
 const number = new Composer()
 number.on('message', async (ctx) => {
     if (ctx.message.text) {
-        if (ctx.message.text.length !== 11 || ctx.message.text.match(/\D/gi)) {
+        if (ctx.message.text == 'Выйти в меню') {
+            await ctx.replyWithHTML(
+    `<b>Добро пожаловать в Нео Шеф!
+     Заказ еды в пару кликов</b>
+    ◽Автоматическое начисление бонусов в размере 3% от суммы
+    ◽За покупку свыше 300₽ - скидка 3%, свыше 500₽ - 5%
+    ◽Бесплатная доставка по городу от 500₽`, 
+                    Markup.keyboard(
+                        [
+                            ['Меню'],['Корзина']
+                        ]
+                    ).resize())
+            return ctx.scene.leave()
+        } else if (ctx.message.text.length !== 11 || ctx.message.text.match(/\D/gi)) {
             ctx.reply('Введите Номер телефона в формате 89123456677')
         } else {
             ctx.session.data.number = ctx.message.text
@@ -63,7 +112,9 @@ number.on('message', async (ctx) => {
         k =  ctx.message.message_id-i;
         ctx.deleteMessage(k)
     }
-        await ctx.replyWithHTML('Напишите Ваш адрес')
+        await ctx.replyWithHTML('Напишите Ваш адрес', Markup.keyboard([
+            ['Выйти в меню']
+        ]).oneTime().resize())
         return ctx.wizard.next()
     }
 })
@@ -77,7 +128,7 @@ address.on('message', async (ctx) => {
                     text: '📍Отправить геопозицию',
                     request_location: true
                 }
-            ], ['Нет']
+            ], ['Нет', 'Выйти в меню']
         ]).resize().oneTime()
         )
         ctx.wizard.next()
@@ -85,11 +136,27 @@ address.on('message', async (ctx) => {
 
 const requestGeo = new Composer()
 requestGeo.on('message', async (ctx) => {
-    ctx.session.data.geo = ctx.message.location || ctx.message.text
+    if (ctx.message.text == 'Выйти в меню') {
+        await ctx.replyWithHTML(
+`<b>Добро пожаловать в Нео Шеф!
+ Заказ еды в пару кликов</b>
+◽Автоматическое начисление бонусов в размере 3% от суммы
+◽За покупку свыше 300₽ - скидка 3%, свыше 500₽ - 5%
+◽Бесплатная доставка по городу от 500₽`, 
+        Markup.keyboard(
+            [
+                ['Меню'],['Корзина']
+            ]
+        ).resize())
+return ctx.scene.leave()
+    } else {
+        ctx.session.data.geo = ctx.message.location || ctx.message.text
     await ctx.reply('Оставить комментарий?', Markup.keyboard(
         ['Без комментария']
         ).oneTime().resize())
     return ctx.wizard.next()
+    }
+    
 })
 
 
@@ -113,10 +180,10 @@ paymentChoice.on('message', async (ctx) => {
 🛍<b>Ваш заказ:</b>
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️ ${ctx.session.cart.filter(item => item.count>0).map(item => '\n'+ "◽" + item.title +' - ['+item.count+'*'+item.price[0]+'|'+item.count*item.price[0]+']')} 
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
-<b>💳 Общая сумма: ₽${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price[0]*curr.count}, 0)}</b> 
+<b>💳 Общая сумма: ₽ ${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price[0]*curr.count}, 0)}</b> 
 Скидка: <b>${discount}%</b>
-<b><ins>Итог:</ins> ₽${Math.round(sum)}</b>
-Вам автоматически начислены бонусы на следующую покупку - ₽${(Math.round(sum*0.03))}🔸
+
+<b><ins>ИТОГ:</ins> ₽ ${Math.round(sum)}</b>
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
 👤Ваши данные:
 └Имя: ${ctx.session.data.name}
@@ -124,9 +191,12 @@ paymentChoice.on('message', async (ctx) => {
 └Адрес: ${ctx.session.data.address.longitude?'геопозиция':ctx.session.data.address}
 Способ доставки: ${ctx.session.data.orderType}
 Комментарий: ${ctx.session.data.comment}
-〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️`, Markup.inlineKeyboard(
+〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
+Вам автоматически начислены бонусы на следующую покупку - ₽${(Math.round(sum*0.03))}🔸
+`, Markup.inlineKeyboard(
         [
-            [Markup.button.callback('✅Подтвердить заказ', 'finallyConfirm')]
+            [Markup.button.callback('✅Подтвердить заказ', 'finallyConfirm')],
+            [Markup.button.callback('❌Отменить заказ', 'finallyReject')]
         ]
     ))
     return ctx.wizard.next()
@@ -145,34 +215,57 @@ sendMsgToChanel.on('callback_query', async (ctx) => {
     else if (sum >=1000) {discount = 5}
 
     const data = ctx.update.callback_query.data;
-    if (data === 'finallyConfirm') {
-        
-        ctx.answerCbQuery()
-await bot.telegram.sendMessage(-1001846120532, `🛍Новый заказ:
+    if (data == 'finallyConfirm') {
+        console.log(ctx.session.cart);
+        await ctx.answerCbQuery()
+        await bot.telegram.sendMessage(-1001846120532, 
+`🛍Новый заказ:
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️ ${ctx.session.cart.filter(item => item.count>0).map(item => '\n'+ "◽" + item.title +' - ['+item.count+'*'+item.price[0]+'|'+item.count*item.price[0]+']')} 
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
-💳 Общая сумма: ₽${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price[0]*curr.count}, 0)} 
+💳 Общая сумма: ₽ ${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price[0]*curr.count}, 0)} 
 Скидка: ${discount}%
 
-Итог: ₽${Math.round(sum)}
-Начислено бонусов: ₽${Math.round(sum*0.03)}🔸
+<ins><b>ИТОГ:</b></ins> ₽ ${Math.round(sum)}
+Начислено бонусов: ₽ ${Math.round(sum*0.03)}🔸
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
 👤Данные:
 └Имя: ${ctx.session.data.name}
-└Номер: ${ctx.session.data.number}
-└Адрес: ${ctx.session.data.address.longitude?'геопозиция':ctx.session.data.address}
+└Номер: <pre>${ctx.session.data.number}</pre>
+└Адрес: ${ctx.session.data.address}
 └Телеграм: @${ctx.session.data.user}
 Способ доставки: ${ctx.session.data.orderType}
 Комментарий: ${ctx.session.data.comment}
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
-`, Markup.inlineKeyboard([[Markup.button.callback('✅Оплачен', 'accepted')], [Markup.button.callback("❌Отклонить", "rejected")]]))
+`, {
+    reply_markup:{
+        inline_keyboard:[
+            [{text:"✅Оплачен", callback_data:"accepted"}],
+            [{text:"❌Отклонить", callback_data:`rejected`}]
+        ]
+    }, parse_mode: 'HTML'
+})
 await bot.telegram.sendLocation(-1001846120532, ctx.session.data.geo.latitude, ctx.session.data.geo.longitude)   
 ctx.session.cart = []
 products.forEach(product => product.count = 0)
 
-}
-
-
+} else if (data == 'finallyReject') {
+    
+    await ctx.answerCbQuery('Заказ отменён')
+    ctx.session.cart = []
+    products.forEach(item => item.count = null)
+    await ctx.editMessageReplyMarkup({inline_keyboard:
+        [
+            [Markup.button.callback('Отменён', 'cancelled')],
+        ]
+    })
+    await ctx.replyWithHTML('Заказ отменён',Markup.keyboard(
+        [
+            ['Меню'],['Корзина']
+        ]
+    ).resize())
+            await ctx.scene.leave()
+    
+} 
     return ctx.scene.leave()
 })
 
