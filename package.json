@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "devjs": "nodemon index.js",
-    "start": "pm2 start index.js --cron-restart=\"0 0 * * *\""
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
