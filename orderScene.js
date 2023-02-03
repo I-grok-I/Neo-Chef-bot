@@ -44,7 +44,7 @@ orderType.on('text', async (ctx) => {
                     ).resize())
             return ctx.scene.leave()
         } else {
-            await ctx.reply('Выберите способ достаки', Markup.keyboard([
+            await ctx.reply('Выберите способ доставки', Markup.keyboard([
                 ['🚗Доставка', '🙋‍♂️Самовывоз']
             ]).oneTime().resize())
             
