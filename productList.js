@@ -432,4 +432,4 @@ const productList = [
     {id: 'turkeySteakRise', title: 'Стейк из индейки с рисом', content: 'Филе индейки, картошка фри, соус сырный, маринованый лук, гарнир', price: 450, categoryId: 'turkeySteakGarnish', category: 'блюда с гарниром', count: null, photo_id: 'AgACAgIAAxkBAAIUFmPFVHpmZe1SaJEXEhbYQSuhCgQxAAJ9wTEboqApSii0RTGQDdRHAQADAgADeQADLQQ'},
 ];
 module.exports.productList = productList
-console.log(productList.filter(item => item.garnish).map(item => item.id));
+// console.log(productList.filter(item => item.garnish).map(item => item.id));
