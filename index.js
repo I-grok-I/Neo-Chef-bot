@@ -1,6 +1,6 @@
 const { Telegraf, Markup, Composer, Scenes, session} = require('telegraf');
 require('dotenv').config();
-const bot = new Telegraf(process.env.BOT_TOKEN);
+const bot = new Telegraf('5856492718:AAFYH9lDst1Jy1Itou4EINFXUwYTpUoBDUo');
 const productList = require('./productList')
 const products = productList.productList
 const btns = require('./constants.js');
