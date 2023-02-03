@@ -3,8 +3,10 @@ require('dotenv').config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const productList = require('./productList')
 const products = productList.productList
-const btns = require('./constants');
-const garnishMealsIds = products.filter(item => item.garnish).map(item => item.id)
+const btns = require('./constants.js');
+const GARNISH_MEAL_IDS = btns.GARNISH_MEAL_IDS
+// const GARNISH_MEAL_IDS = products.filter(item => item.garnish).map(item => item.id)
+
 //+++++++++++++++++++++
 const orderScene = require('./orderScene');
 const stage = new Scenes.Stage([orderScene])
@@ -72,10 +74,10 @@ bot.on("photo", async (ctx) => {
         console.log(error.message);
     }
 });
-
+//price
 
 //действия при нажатии на блюда с выбором гарнира
-bot.action(garnishMealsIds, async (ctx) => {
+bot.action(GARNISH_MEAL_IDS, async (ctx) => {
     try {
         await ctx.editMessageText('Выберите гарнир')
         await ctx.editMessageReplyMarkup({inline_keyboard:[ 
@@ -113,7 +115,7 @@ bot.action(products.map(product => product.categoryId), async (ctx) => {
         await ctx.deleteMessage();
         // в строке ниже я привожу продукты в удобную форму через метод map, чтобы каждый продукт имел форму массива из двух элементов.
         // первый - название продукта + его цена, а второй - айди продукта. Дальше я добавляю в этот массив кнопку "назад" для перехода в меню
-        const tappedCategoryProducts = products.filter(product =>product.categoryId == ctx.match).map(item => [item.title +` [${item.price[0]}]`, item.id])
+        const tappedCategoryProducts = products.filter(product =>product.categoryId == ctx.match).map(item => [item.title +` [${item.price}]`, item.id])
         tappedCategoryProducts.push(['🔙назад', 'menu'])
         ctx.sendMessage(`${products.find(item => ctx.match == item.categoryId).category}`, Markup.inlineKeyboard(tappedCategoryProducts.map(item=> [Markup.button.callback(item[0], item[1])])))
         //в строке выше я ищу в продуктах название категории того продукта, которое соответствует колбэку нажатой мной кнопки (например, я нажал на ('Банан', 'banana'), значит буду искать название категории того продукта, айди категории которого == 'banana')
@@ -163,19 +165,19 @@ bot.hears('Корзина', async ctx => {
         ctx.session ??= { cart: [] };
         ctx.session.cart ??= [];
         const cart = [...new Set(ctx.session.cart)]
-        if(cart.length === 0 || cart.reduce((acc, curr)=> {return acc+=curr.price[0]*curr.count}, 0)==0) {
+        if(cart.length === 0 || cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)==0) {
             await ctx.replyWithHTML('<b>Корзина пуста...</b>', Markup.inlineKeyboard( 
                 [
                     [Markup.button.callback(`📝Меню`, 'menu')],
                 ]))
         } else {
-            let sum = cart.reduce((acc, curr)=> {return acc+=curr.price[0]*curr.count}, 0)
+            let sum = cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
             if (sum >=500 && sum <1000) {sum = sum/100*97}
             else if (sum >=1000) {sum = sum/100*95}
             let discount = 0
             if (sum >=500 && sum <1000) {discount = 3}
             else if (sum >=1000) {discount = 5}
-            await ctx.replyWithHTML(`🛍<b>Ваш заказ:</b> \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️ ${cart.filter(item => item.count>=1).map(item => '\n'+ "◽" + item.title +' - ['+item.count+'*'+item.price[0]+'|'+item.count*item.price[0]+']')} \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n <b>💳 Общая сумма: ₽${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price[0]*curr.count}, 0)}</b>\nСкидка: <b>${discount}%</b>\n<b><ins>Итог:</ins> ₽${Math.round(sum)}</b>`, Markup.inlineKeyboard([
+            await ctx.replyWithHTML(`🛍<b>Ваш заказ:</b> \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️ ${cart.filter(item => item.count>=1).map(item => '\n'+ "◽" + item.title +' - ['+item.count+'*'+item.price+'|'+item.count*item.price+']')} \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n <b>💳 Общая сумма: ₽${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)}</b>\nСкидка: <b>${discount}%</b>\n<b><ins>Итог:</ins> ₽${Math.round(sum)}</b>`, Markup.inlineKeyboard([
             [Markup.button.callback(`✅ Перейти к оплате`, 'submitOrder')],
             [Markup.button.callback(`❌ Отменить заказ`, 'cancelOrder')],
             [Markup.button.callback(`🔙В категории`, 'menu')]
@@ -213,7 +215,7 @@ bot.on('callback_query', async (ctx) => {
             await ctx.deleteMessage()
             await ctx.telegram.sendPhoto(ctx.chat.id, tappedProduct.photo_id || 'AgACAgIAAxkBAAIRVGPD-BlnteHFVOo43qK-Ps1fpyoRAAIPwjEboqAhSiqb19LkE4i3AQADAgADeQADLQQ', 
                 {
-                    caption: `<b>${tappedProduct.title} - [₽ ${tappedProduct.price[0]}]</b> \n〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\nСостав:\n${tappedProduct.content || ''}`,
+                    caption: `<b>${tappedProduct.title} - [₽ ${tappedProduct.price}]</b> \n〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\nСостав:\n${tappedProduct.content || ''}`,
                     reply_markup:{
                         inline_keyboard:[
                             [{text:"Добавить в корзину", callback_data:"+"}],
@@ -226,7 +228,7 @@ bot.on('callback_query', async (ctx) => {
             cart.at(-1).count+=1 || ctx.reply('ok')
             await ctx.editMessageReplyMarkup({inline_keyboard:[
                 [Markup.button.callback('➖', '-'), Markup.button.callback(`${cart.at(-1).count}`, 'count'), Markup.button.callback('➕', '+')],
-                [Markup.button.callback(`🛒 (${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price[0]*curr.count}, 0)})`, 'cart')],
+                [Markup.button.callback(`🛒 (${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)})`, 'cart')],
                 [Markup.button.callback('Назад', `${cart.at(-1).categoryId}`)]
             ]})
             // console.log(ctx.session.cart)
@@ -235,7 +237,7 @@ bot.on('callback_query', async (ctx) => {
             cart.at(-1).count-=1
             await ctx.editMessageReplyMarkup({inline_keyboard:[
                 [Markup.button.callback('➖', '-'), Markup.button.callback(`${cart.at(-1).count}`, 'count'), Markup.button.callback('➕', '+')],
-                [Markup.button.callback(`🛒 (${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price[0]*curr.count}, 0)})`, 'cart')],
+                [Markup.button.callback(`🛒 (${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)})`, 'cart')],
                 [Markup.button.callback('Назад', `${cart.at(-1).categoryId}`)]
             ]})
         } 
@@ -243,7 +245,7 @@ bot.on('callback_query', async (ctx) => {
                 
             await ctx.editMessageReplyMarkup({inline_keyboard:[
                 [Markup.button.callback(`${cart.at(-1).count}`, 'count'), Markup.button.callback('➕', '+')],
-                [Markup.button.callback(`🛒 (${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price[0]*curr.count}, 0)})`, 'cart')],
+                [Markup.button.callback(`🛒 (${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)})`, 'cart')],
                 [Markup.button.callback('Назад', `${cart.at(-1).categoryId}`)]
             ]})
         } 
@@ -262,19 +264,19 @@ bot.on('callback_query', async (ctx) => {
         {   
             ctx.answerCbQuery()
             ctx.deleteMessage()
-            if(cart.length === 0 || cart.reduce((acc, curr)=> {return acc+=curr.price[0]*curr.count}, 0)==0) {
+            if(cart.length === 0 || cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)==0) {
                 await ctx.replyWithHTML('<b>Корзина пуста...</b>', Markup.inlineKeyboard( 
                     [
                         [Markup.button.callback(`📝Меню`, 'menu')],
                     ]))
             } else {
-                let sum = cart.reduce((acc, curr)=> {return acc+=curr.price[0]*curr.count}, 0)
+                let sum = cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
                 if (sum >=500 && sum <1000) {sum = sum/100*97}
                 else if (sum >=1000) {sum = sum/100*95}
                 let discount = 0
                 if (sum >=500 && sum <1000) {discount = 3}
                 else if (sum >=1000) {discount = 5}
-                await ctx.replyWithHTML(`🛍<b>Ваш заказ:</b> \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️ ${cart.filter(item => item.count>=1).map(item => '\n'+ "◽" + item.title +  ' - ['+item.count+'*'+item.price[0]+'|'+item.count*item.price[0]+']')} \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n <b>💳 Общая сумма: ₽${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price[0]*curr.count}, 0)}</b>\nСкидка: <b>${discount}%</b>\n<b><ins>Итог:</ins> ₽${Math.round(sum)}</b>`, Markup.inlineKeyboard([
+                await ctx.replyWithHTML(`🛍<b>Ваш заказ:</b> \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️ ${cart.filter(item => item.count>=1).map(item => '\n'+ "◽" + item.title +  ' - ['+item.count+'*'+item.price+'|'+item.count*item.price+']')} \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n <b>💳 Общая сумма: ₽${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)}</b>\nСкидка: <b>${discount}%</b>\n<b><ins>Итог:</ins> ₽${Math.round(sum)}</b>`, Markup.inlineKeyboard([
                     [Markup.button.callback(`✅ Перейти к оплате`, 'submitOrder')],
                     [Markup.button.callback(`❌ Отменить заказ`, 'cancelOrder')],
                     [Markup.button.callback(`🔙В категории`, 'menu')]

@@ -3,7 +3,17 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 const productList = require('./productList');
 const products = productList.productList
 
-
+const GARNISH_MEAL_IDS = [
+'cknFile',    'cknShnizzel',
+'toriSet',    'friedCkn',
+'arabCkn',    'frenchCkn',
+'arabBeef',   'frenchBeef',
+'grillForel', 'grillDorado',
+'semgaStake', 'tomahawk',
+'tibon',      'antrekot',
+'cknSteak',   'turkeySteak'
+]
+module.exports.GARNISH_MEAL_IDS = GARNISH_MEAL_IDS
 
 const categoryBtns = [ 
     [Markup.button.callback('завтраки', 'breakfasts'),Markup.button.callback('салаты', 'salads'),Markup.button.callback('супы', 'soups')],
