@@ -2,7 +2,7 @@ const { Telegraf, Markup } = require('telegraf');
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const productList = require('./productList');
 const products = productList.productList
-
+//ok
 const GARNISH_MEAL_IDS = [
 'cknFile',    'cknShnizzel',
 'toriSet',    'friedCkn',
