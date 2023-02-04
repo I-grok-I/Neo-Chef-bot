@@ -213,7 +213,7 @@ bot.on('callback_query', async (ctx) => {
             ctx.session.cart.push(tappedProduct)                   
             // console.log(ctx.session.cart)
             await ctx.deleteMessage()
-            await ctx.telegram.sendPhoto(ctx.chat.id, tappedProduct.photo_id || 'AgACAgIAAxkBAAIRVGPD-BlnteHFVOo43qK-Ps1fpyoRAAIPwjEboqAhSiqb19LkE4i3AQADAgADeQADLQQ', 
+            await ctx.telegram.sendPhoto(ctx.chat.id, tappedProduct.photo_id || 'AgACAgIAAxkBAAItwWPeVi9Y4E5i0rwiQzXLLghmwJPzAAIWxzEbyjj4Sh5BQTr4yZqgAQADAgADeQADLgQ', 
                 {
                     caption: `<b>${tappedProduct.title} - [₽ ${tappedProduct.price}]</b> \n〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\nСостав:\n${tappedProduct.content || ''}`,
                     reply_markup:{
