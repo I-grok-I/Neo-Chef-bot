@@ -47,20 +47,20 @@ bot.action('rejected', async (ctx) => {
 }) 
 
 
-bot.action('finallyConfirm', async (ctx) => {
-    try {
-        await ctx.answerCbQuery('Заказ отправлен', true)
-        ctx.session.cart = []
-        products.forEach(item => item.count = null)
-        await ctx.editMessageReplyMarkup({inline_keyboard:
-            [
-                [Markup.button.callback('Заказ отправлен', 'cancelled')],
-            ]
-        })
-    } catch (error) {
-        console.log(error.message);
-    } 
-})
+// bot.action('finallyConfirm', async (ctx) => {
+//     try {
+//         await ctx.answerCbQuery('Заказ отправлен', true)
+//         ctx.session.cart = []
+//         products.forEach(item => item.count = null)
+//         await ctx.editMessageReplyMarkup({inline_keyboard:
+//             [
+//                 [Markup.button.callback('Заказ отправлен', 'cancelled')],
+//             ]
+//         })
+//     } catch (error) {
+//         console.log(error.message);
+//     } 
+// })
         
 
 bot.on("photo", async (ctx) => {

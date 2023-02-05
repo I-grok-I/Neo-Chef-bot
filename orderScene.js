@@ -262,8 +262,12 @@ sendMsgToChanel.on('callback_query', async (ctx) => {
         
             const data = ctx.update.callback_query.data;
             if (data == 'finallyConfirm') {
-                console.log(ctx.session.cart);
                 await ctx.answerCbQuery()
+                await ctx.editMessageReplyMarkup({reply_markup:{
+                    inline_keyboard:[
+                        [{text:"Заказ отправлен", callback_data:"orderSent"}]
+                    ]
+                }})
                 await bot.telegram.sendMessage(-1001846120532, 
 `🛍Новый заказ:
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️ ${ctx.session.cart.filter(item => item.count>0).map(item => '\n'+ "◽" + item.title +' - ['+item.count+'*'+item.price+'|'+item.count*item.price+']')} 
@@ -294,7 +298,7 @@ sendMsgToChanel.on('callback_query', async (ctx) => {
         ctx.session.cart = []
         products.forEach(product => product.count = 0)
         
-        } else if (data == 'finallyReject') {
+        } if (data == 'finallyReject') {
             
             await ctx.answerCbQuery('Заказ отменён')
             ctx.session.cart = []
