@@ -263,11 +263,12 @@ sendMsgToChanel.on('callback_query', async (ctx) => {
             const data = ctx.update.callback_query.data;
             if (data == 'finallyConfirm') {
                 await ctx.answerCbQuery()
-                await ctx.editMessageReplyMarkup({reply_markup:{
-                    inline_keyboard:[
+                await ctx.editMessageReplyMarkup({
+                    inline_keyboard:
+                    [
                         [{text:"Заказ отправлен", callback_data:"orderSent"}]
                     ]
-                }})
+                })
                 await bot.telegram.sendMessage(-1001846120532, 
 `🛍Новый заказ:
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️ ${ctx.session.cart.filter(item => item.count>0).map(item => '\n'+ "◽" + item.title +' - ['+item.count+'*'+item.price+'|'+item.count*item.price+']')} 
