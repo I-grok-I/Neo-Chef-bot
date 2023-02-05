@@ -58,7 +58,7 @@ bot.action('rejected', async (ctx) => {
 //             ]
 //         })
 //     } catch (error) {
-//         console.log(error.message);
+//         console.log(error.message); cancel
 //     } 
 // })
         
@@ -256,7 +256,7 @@ bot.on('callback_query', async (ctx) => {
             await ctx.editMessageText('Корзина пуста...')
             await ctx.editMessageReplyMarkup({inline_keyboard:
                 [
-                    [Markup.button.callback('📝Меню', 'menu')],
+                    [{text:"📝Меню", callback_data:"menu"}],
                 ]
             })
         } 
