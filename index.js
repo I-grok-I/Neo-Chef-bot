@@ -47,29 +47,18 @@ bot.action('rejected', async (ctx) => {
 }) 
 
 
-// bot.action('finallyConfirm', async (ctx) => {
-//     try {
-//         await ctx.answerCbQuery('Заказ отправлен', true)
-//         ctx.session.cart = []
-//         products.forEach(item => item.count = null)
-//         await ctx.editMessageReplyMarkup({inline_keyboard:
-//             [
-//                 [Markup.button.callback('Заказ отправлен', 'cancelled')],
-//             ]
-//         })
-//     } catch (error) {
-//         console.log(error.message); cancel
-//     } 
-// })
         
 
 bot.on("photo", async (ctx) => {
     try {
+        if (ctx.message.from.username == 'I_grok') {
+
         const captionPhoto = ctx.message.caption;
         const captionEntitiesPhoto = ctx.message.caption_entities;
         const chat_id = 859134174
         const fileIdPhoto = ctx.message.photo[ctx.message.photo.length-1].file_id;
         return ctx.replyWithHTML(`${fileIdPhoto}`);
+        }
     } catch (error) {
         console.log(error.message);
     }
@@ -215,7 +204,10 @@ bot.on('callback_query', async (ctx) => {
             await ctx.deleteMessage()
             await ctx.telegram.sendPhoto(ctx.chat.id, tappedProduct.photo_id || 'AgACAgIAAxkBAAItwWPeVi9Y4E5i0rwiQzXLLghmwJPzAAIWxzEbyjj4Sh5BQTr4yZqgAQADAgADeQADLgQ', 
                 {
-                    caption: `<b>${tappedProduct.title} - [₽ ${tappedProduct.price}]</b> \n〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\nСостав:\n${tappedProduct.content || ''}`,
+                    caption: 
+`<b>${tappedProduct.title} - [₽ ${tappedProduct.price}]</b> 
+〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
+${tappedProduct.content ? 'Состав: ' + tappedProduct.content : ''}`,
                     reply_markup:{
                         inline_keyboard:[
                             [{text:"Добавить в корзину", callback_data:"+"}],
