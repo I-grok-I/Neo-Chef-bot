@@ -5,6 +5,7 @@ const productList = require('./productList.js')
 const products = productList.productList
 const btns = require('./constants.js');
 const GARNISH_MEAL_IDS = btns.GARNISH_MEAL_IDS
+const STOPLIST = btns.STOPLIST
 // const GARNISH_MEAL_IDS = products.filter(item => item.garnish).map(item => item.id)
 
 //+++++++++++++++++++++
@@ -300,8 +301,15 @@ ${tappedProduct.content ? 'Состав: ' + tappedProduct.content : ''}`,
 })
 //________________________________CALLBACK QUERY_____END
 
-
-
+bot.command('stoplist', async (ctx) => {
+ctx.reply(STOPLIST)
+})
+bot.command('num', async (ctx) => {
+    ctx.replyWithHTML(CAFE_NUM)
+})
+bot.command('add', async (ctx) => {
+    ctx.replyWithHTML(CAFE_ADDRESS)
+})
 
 
 bot.launch();

@@ -26,9 +26,14 @@ const helloText = `<b>Добро пожаловать в Нео Шеф!
 с 06.02 по 12.02 включительно <b>с 20:00 на покупки скидка 15%</b>`
 module.exports.helloText = helloText
 
+const STOPLIST = `Блюда, которые на данный момент находятся в стоп-листе:`
+module.exports.STOPLIST = STOPLIST
 
+const CAFE_NUM = `По всем вопросам вы можете обращаться по номеру <pre><b>89283090099</b></pre>`
+module.exports.CAFE_NUM = CAFE_NUM
 
-
+const CAFE_ADDRESS = `Адрес: <b>ул. Тотурбиева 133</b>`
+module.exports.CAFE_ADDRESS = CAFE_ADDRESS
 
 const date = new Date();
 if (date.getHours() < 12) {
