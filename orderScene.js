@@ -1,4 +1,5 @@
-const {Telegraf, Markup, Composer, Scenes} = require('telegraf')
+const {Telegraf, Markup, Composer, Scenes} = require('telegraf');
+const { helloText } = require('./constants');
 require('dotenv').config();
 const bot = new Telegraf('5856492718:AAFYH9lDst1Jy1Itou4EINFXUwYTpUoBDUo');
 const productList = require('./productList')
@@ -13,7 +14,7 @@ startWizard.on('callback_query', async (ctx) => {
         await ctx.reply('Выберите способ достаки', Markup.keyboard([
             ['🚗Доставка', '🙋‍♂️Самовывоз'],
             ['Выйти в меню']
-        ]).oneTime().resize())
+        ]).resize())
          return ctx.wizard.next()
     } catch (error) {
         console.log(error.message);
@@ -28,15 +29,10 @@ orderType.on('text', async (ctx) => {
             ctx.session.data.orderType = ctx.message.text
         await ctx.reply('Напишите имя', Markup.keyboard([
             ['Выйти в меню']
-        ]).oneTime().resize())
+        ]).resize())
         return ctx.wizard.next()
         } else if (ctx.message.text == 'Выйти в меню') {
-            await ctx.replyWithHTML(
-`<b>Добро пожаловать в Нео Шеф!
- Заказ еды в пару кликов</b>
-◽Автоматическое начисление бонусов в размере 3% от суммы
-◽За покупку свыше 300₽ - скидка 3%, свыше 500₽ - 5%
-◽Бесплатная доставка по городу от 500₽`, 
+            await ctx.replyWithHTML(helloText, 
                     Markup.keyboard(
                         [
                             ['Меню'],['Корзина']
@@ -46,7 +42,7 @@ orderType.on('text', async (ctx) => {
         } else {
             await ctx.reply('Выберите способ доставки', Markup.keyboard([
                 ['🚗Доставка', '🙋‍♂️Самовывоз']
-            ]).oneTime().resize())
+            ]).resize())
             
         }
     } catch (error) {
@@ -61,12 +57,7 @@ const firstName = new Composer()
 firstName.on('text', async (ctx) => {
     try {
         if (ctx.message.text == 'Выйти в меню') {
-            await ctx.replyWithHTML(
-`<b>Добро пожаловать в Нео Шеф!
- Заказ еды в пару кликов</b>
-◽Автоматическое начисление бонусов в размере 3% от суммы
-◽За покупку свыше 300₽ - скидка 3%, свыше 500₽ - 5%
-◽Бесплатная доставка по городу от 500₽`, 
+            await ctx.replyWithHTML(helloText, 
                     Markup.keyboard(
                         [
                             ['Меню'],['Корзина']
@@ -85,7 +76,7 @@ firstName.on('text', async (ctx) => {
                      request_contact: true
                   }
                ], ['Выйти в меню']
-            ]).oneTime().resize());
+            ]).resize());
             return ctx.wizard.next()
         }
     } catch (error) {
@@ -100,12 +91,7 @@ number.on('message', async (ctx) => {
     try {
         if (ctx.message.text) {
             if (ctx.message.text == 'Выйти в меню') {
-                await ctx.replyWithHTML(
-`<b>Добро пожаловать в Нео Шеф!
- Заказ еды в пару кликов</b>
-◽Автоматическое начисление бонусов в размере 3% от суммы
-◽За покупку свыше 300₽ - скидка 3%, свыше 500₽ - 5%
-◽Бесплатная доставка по городу от 500₽`, 
+                await ctx.replyWithHTML(helloText, 
                         Markup.keyboard(
                             [
                                 ['Меню'],['Корзина']
@@ -128,7 +114,7 @@ number.on('message', async (ctx) => {
         }
             await ctx.replyWithHTML('Адрес доставки? \nНапишите улицу и номер дома', Markup.keyboard([
                 ['Выйти в меню']
-            ]).oneTime().resize())
+            ]).resize())
             return ctx.wizard.next()
         }
     } catch (error) {
@@ -140,12 +126,7 @@ const address = new Composer()
 address.on('message', async (ctx) => { 
     try {
         if (ctx.message.text == 'Выйти в меню') {
-            await ctx.replyWithHTML(
-`<b>Добро пожаловать в Нео Шеф!
- Заказ еды в пару кликов</b>
-◽Автоматическое начисление бонусов в размере 3% от суммы
-◽За покупку свыше 300₽ - скидка 3%, свыше 500₽ - 5%
-◽Бесплатная доставка по городу от 500₽`, 
+            await ctx.replyWithHTML(helloText, 
             Markup.keyboard(
                 [
                     ['Меню'],['Корзина']
@@ -161,7 +142,7 @@ address.on('message', async (ctx) => {
                     request_location: true
                 }
             ], ['Нет', 'Выйти в меню']
-        ]).resize().oneTime()
+        ]).resize()
         )
         ctx.wizard.next()
         }
@@ -174,12 +155,7 @@ const requestGeo = new Composer()
 requestGeo.on('message', async (ctx) => {
     try {
         if (ctx.message.text == 'Выйти в меню') {
-            await ctx.replyWithHTML(
-`<b>Добро пожаловать в Нео Шеф!
- Вкусная еда в паре кликов</b>
-◽Автоматическое начисление бонусов в размере 3% от суммы
-◽За покупку свыше 300₽ - скидка 3%, свыше 500₽ - 5%
-◽Бесплатная доставка по городу от 500₽`, 
+            await ctx.replyWithHTML(helloText, 
             Markup.keyboard(
                 [
                     ['Меню'],['Корзина']
@@ -190,7 +166,7 @@ requestGeo.on('message', async (ctx) => {
             ctx.session.data.geo = ctx.message.location || ctx.message.text
         await ctx.reply('Оставить комментарий?', Markup.keyboard(
             ['Без комментария']
-            ).oneTime().resize())
+            ).resize())
         return ctx.wizard.next()
         }
     } catch (error) {

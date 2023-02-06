@@ -15,6 +15,13 @@ const GARNISH_MEAL_IDS = [
 ]
 module.exports.GARNISH_MEAL_IDS = GARNISH_MEAL_IDS
 
+const helloText = `<b>Добро пожаловать в Нео Шеф!
+Вкусная еда в паре кликов</b>
+◽Автоматическое начисление бонусов в размере 3% от суммы
+◽За покупку свыше 500₽ - скидка 3%, свыше 1000₽ - 5%
+◽Бесплатная доставка по городу от 500₽`
+module.exports.helloText = helloText
+
 const categoryBtns = [ 
     [Markup.button.callback('завтраки', 'breakfasts'),Markup.button.callback('салаты', 'salads'),Markup.button.callback('супы', 'soups')],
     [Markup.button.callback('блюда на грилле-углях', 'bbq')],
