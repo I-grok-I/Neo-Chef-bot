@@ -26,7 +26,7 @@ startWizard.on('callback_query', async (ctx) => {
 
 //шаг доставки. Тут сохраняю в orderType прошлое сообщение (способ доставки) и спрашиваю имя.
 const orderType = new Composer()
-orderType.on('callback_query', async (ctx) => {
+orderType.on('text', async (ctx) => {
     try {
         if (ctx.message.text === '🚗Доставка' || ctx.message.text === '🙋‍♂️Самовывоз') {
             ctx.session.data.orderType = ctx.message.text
@@ -57,7 +57,7 @@ orderType.on('callback_query', async (ctx) => {
 //Если сообщение меньше 3 символов или сообщение состоит не из букв - отправляю сбщ "введите имя!", 
 //если всё норм, сохраняю сообщение в session.data.name и перехожу дальше
 const firstName = new Composer()
-firstName.on('callback_query', async (ctx) => {
+firstName.on('text', async (ctx) => {
     try {
         if (ctx.message.text == 'Выйти в меню') {
             await ctx.replyWithHTML(helloText, 
@@ -90,7 +90,7 @@ firstName.on('callback_query', async (ctx) => {
 //если прошлое сбщ - это текст, я валидирую номер. если не текст - значит это номер. сохраняю номер в session.data.number
 //потом отправляю
 const number = new Composer()
-number.on('callback_query', async (ctx) => {
+number.on('message', async (ctx) => {
     try {
         if (ctx.message.text) {
             if (ctx.message.text == 'Выйти в меню') {
@@ -126,7 +126,7 @@ number.on('callback_query', async (ctx) => {
 })
 //тут спрашиваю адрес. Потом спрашиваю хочет ли юзер отправить гео и отправляю клавиатуру с кнопкой оправки гео и с кнопкой "нет"
 const address = new Composer()
-address.on('callback_query', async (ctx) => { 
+address.on('message', async (ctx) => { 
     try {
         if (ctx.message.text == 'Выйти в меню') {
             await ctx.replyWithHTML(helloText, 
@@ -157,7 +157,7 @@ address.on('callback_query', async (ctx) => {
 })
 
 const requestGeo = new Composer()
-requestGeo.on('callback_query', async (ctx) => {
+requestGeo.on('message', async (ctx) => {
     try {
         if (ctx.message.text == 'Выйти в меню') {
             await ctx.replyWithHTML(helloText, 
@@ -182,7 +182,7 @@ requestGeo.on('callback_query', async (ctx) => {
 
 
 const paymentChoice = new Composer()
-paymentChoice.on('callback_query', async (ctx) => {
+paymentChoice.on('message', async (ctx) => {
     try {
         ctx.session.cart = [...new Set(ctx.session.cart)]
         ctx.session.data.comment = ctx.message.text
