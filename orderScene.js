@@ -9,9 +9,6 @@ const products = productList.productList
 const startWizard = new Composer()
 startWizard.on('callback_query', async (ctx) => {
     try {
-    console.log(ctx.wizard.steps);
-    return ctx.wizard.selectStep(5)
-
         let sum = ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
         ctx.session.data = {}
         await ctx.deleteMessage()
@@ -98,16 +95,9 @@ number.on('message', async (ctx) => {
                         ).resize())
                 return ctx.scene.leave()
             } else if (ctx.message.text.length !== 11 || ctx.message.text.match(/\D/gi)) {
-                await ctx.reply('Введите Номер телефона в формате 89123456677') 
+                ctx.reply('Введите Номер телефона в формате 89123456677')
             } else {
                 ctx.session.data.number = ctx.message.text
-                // if (ctx.session.data.orderType === '🙋‍♂️Самовывоз')  {
-                //     await ctx.reply('Оставить комментарий?', Markup.keyboard(
-                //         ['Без комментария']
-                //         ).resize())
-                //     return ctx.wizard.selectStep(8)
-
-                // }
                 await ctx.replyWithHTML('Адрес доставки? \nНапишите улицу и номер дома')
                 return ctx.wizard.next()
             }
@@ -130,7 +120,6 @@ number.on('message', async (ctx) => {
 //тут спрашиваю адрес. Потом спрашиваю хочет ли юзер отправить гео и отправляю клавиатуру с кнопкой оправки гео и с кнопкой "нет"
 const address = new Composer()
 address.on('message', async (ctx) => { 
-    console.log(ctx.wizard);
     try {
         if (ctx.message.text == 'Выйти в меню') {
             await ctx.replyWithHTML(helloText, 
@@ -162,7 +151,6 @@ address.on('message', async (ctx) => {
 
 const requestGeo = new Composer()
 requestGeo.on('message', async (ctx) => {
-    console.log(ctx.wizard.steps);
     try {
         if (ctx.message.text == 'Выйти в меню') {
             await ctx.replyWithHTML(helloText, 
@@ -173,7 +161,7 @@ requestGeo.on('message', async (ctx) => {
             ).resize())
     return ctx.scene.leave()
         } else {
-            ctx.session.data.geo = ctx.message.location || ctx.message.text || null
+            ctx.session.data.geo = ctx.message.location || ctx.message.text
         await ctx.reply('Оставить комментарий?', Markup.keyboard(
             ['Без комментария']
             ).resize())
@@ -187,7 +175,7 @@ requestGeo.on('message', async (ctx) => {
 
 
 const paymentChoice = new Composer()
-paymentChoice.on('message', async (ctx) => { 
+paymentChoice.on('message', async (ctx) => {
     try {
         ctx.session.cart = [...new Set(ctx.session.cart)]
         ctx.session.data.comment = ctx.message.text
@@ -226,6 +214,8 @@ paymentChoice.on('message', async (ctx) => {
 └Адрес: ${ctx.session.data.address.longitude?'геопозиция':ctx.session.data.address}
 Способ доставки: ${ctx.session.data.orderType}
 Комментарий: ${ctx.session.data.comment}
+Для оплаты переводом переведите ${Math.round(sum)}₽ по номеру <pre>89883090099</pre>
+<a href="https://t.me/NeoChef2">Отправить чек об оплате</a>
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
 Вам автоматически начислены бонусы на следующую покупку - ₽${(Math.round(sum*0.03))}🔸
 `, Markup.inlineKeyboard(
