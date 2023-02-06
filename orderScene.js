@@ -105,7 +105,9 @@ number.on('message', async (ctx) => {
                 ctx.reply('Введите Номер телефона в формате 89123456677')
             } else {
                 ctx.session.data.number = ctx.message.text
-                await ctx.replyWithHTML('Адрес доставки? \nНапишите улицу и номер дома')
+                if (ctx.session.data.orderType == '🙋‍♂️Самовывоз') {
+                    return ctx.scene.enter('requestGeo')
+                } else await ctx.replyWithHTML('Адрес доставки? \nНапишите улицу и номер дома')
                 return ctx.wizard.next()
             }
         } else {
@@ -157,7 +159,7 @@ address.on('message', async (ctx) => {
 })
 
 const requestGeo = new Composer()
-requestGeo.on('message', async (ctx) => {
+requestGeo.on('callback_query', async (ctx) => {
     try {
         if (ctx.message.text == 'Выйти в меню') {
             await ctx.replyWithHTML(helloText, 
