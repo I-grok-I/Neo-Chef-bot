@@ -233,7 +233,7 @@ sendMsgToChanel.on('callback_query', async (ctx) => {
             // console.log(ctx.callbackQuery)
             let sum = ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
             const date = new Date();
-            if (date.getHours() >= 20) {
+            if (date.getHours() >= 18) {
                 sum*= 0.8
             } else {
                 if (sum >=500 && sum <1000) {
@@ -244,7 +244,7 @@ sendMsgToChanel.on('callback_query', async (ctx) => {
             }
         
             let discount = 0
-            if (date.getHours >= 20) {
+            if (date.getHours >= 18) {
                 discount = 20
             } else {
                 if (sum >=500 && sum <1000) {discount = 3}
