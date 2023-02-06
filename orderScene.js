@@ -102,7 +102,7 @@ number.on('message', async (ctx) => {
                     await ctx.reply('Оставить комментарий?', Markup.keyboard(
                         ['Без комментария']
                         ).resize())
-                    return ctx.wizard.selectStep(7)
+                    return ctx.wizard.selectStep(6)
 
                 }
                 await ctx.replyWithHTML('Адрес доставки? \nНапишите улицу и номер дома')
