@@ -99,7 +99,7 @@ number.on('message', async (ctx) => {
             } else {
                 ctx.session.data.number = ctx.message.text
                 if (ctx.session.data.orderType == '🙋‍♂️Самовывоз') {
-                    ctx.wizard.selectStep(6)
+                    await ctx.wizard.selectStep(6)
                 }
                 await ctx.replyWithHTML('Адрес доставки? \nНапишите улицу и номер дома')
                 return ctx.wizard.next()
