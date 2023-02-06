@@ -214,6 +214,7 @@ paymentChoice.on('message', async (ctx) => {
 └Адрес: ${ctx.session.data.address.longitude?'геопозиция':ctx.session.data.address}
 Способ доставки: ${ctx.session.data.orderType}
 Комментарий: ${ctx.session.data.comment}
+〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
 Для оплаты переводом переведите ${Math.round(sum)}₽ по номеру <pre>89883090099</pre>
 <a href="https://t.me/NeoChef2">Отправить чек об оплате</a>
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
