@@ -26,7 +26,7 @@ startWizard.on('callback_query', async (ctx) => {
 
 //шаг доставки. Тут сохраняю в orderType прошлое сообщение (способ доставки) и спрашиваю имя.
 const orderType = new Composer()
-orderType.on('text', async (ctx) => {
+orderType.on('callback_query', async (ctx) => {
     try {
         if (ctx.message.text === '🚗Доставка' || ctx.message.text === '🙋‍♂️Самовывоз') {
             ctx.session.data.orderType = ctx.message.text
@@ -57,7 +57,7 @@ orderType.on('text', async (ctx) => {
 //Если сообщение меньше 3 символов или сообщение состоит не из букв - отправляю сбщ "введите имя!", 
 //если всё норм, сохраняю сообщение в session.data.name и перехожу дальше
 const firstName = new Composer()
-firstName.on('text', async (ctx) => {
+firstName.on('callback_query', async (ctx) => {
     try {
         if (ctx.message.text == 'Выйти в меню') {
             await ctx.replyWithHTML(helloText, 
@@ -90,10 +90,9 @@ firstName.on('text', async (ctx) => {
 //если прошлое сбщ - это текст, я валидирую номер. если не текст - значит это номер. сохраняю номер в session.data.number
 //потом отправляю
 const number = new Composer()
-number.on('message', async (ctx) => {
+number.on('callback_query', async (ctx) => {
     try {
-        if(ctx.session.data.orderType == '🚗Доставка') {
-            if (ctx.message.text) {
+        if (ctx.message.text) {
             if (ctx.message.text == 'Выйти в меню') {
                 await ctx.replyWithHTML(helloText, 
                         Markup.keyboard(
@@ -121,35 +120,13 @@ number.on('message', async (ctx) => {
             ]).resize())
             return ctx.wizard.next()
         }
-        } else {
-            if (ctx.message.text) {
-                if (ctx.message.text == 'Выйти в меню') {
-                    await ctx.replyWithHTML(helloText, 
-                            Markup.keyboard(
-                                [
-                                    ['📝МЕНЮ'],['🛒КОРЗИНА']
-                                ]
-                            ).resize())
-                    return ctx.scene.leave()
-                } else if (ctx.message.text.length !== 11 || ctx.message.text.match(/\D/gi)) {
-                    ctx.reply('Введите Номер телефона в формате 89123456677')
-                } else {
-                    ctx.session.data.number = ctx.message.text
-                    return ctx.wizard.next()
-                }
-            } else {
-                ctx.session.data.number = ctx.message.contact.phone_number
-                return ctx.wizard.next()
-            }
-        }
-        
     } catch (error) {
         console.log(error.message);
     }
 })
 //тут спрашиваю адрес. Потом спрашиваю хочет ли юзер отправить гео и отправляю клавиатуру с кнопкой оправки гео и с кнопкой "нет"
 const address = new Composer()
-address.on('message', async (ctx) => { 
+address.on('callback_query', async (ctx) => { 
     try {
         if (ctx.message.text == 'Выйти в меню') {
             await ctx.replyWithHTML(helloText, 
@@ -180,7 +157,7 @@ address.on('message', async (ctx) => {
 })
 
 const requestGeo = new Composer()
-requestGeo.on('message', async (ctx) => {
+requestGeo.on('callback_query', async (ctx) => {
     try {
         if (ctx.message.text == 'Выйти в меню') {
             await ctx.replyWithHTML(helloText, 
@@ -205,7 +182,7 @@ requestGeo.on('message', async (ctx) => {
 
 
 const paymentChoice = new Composer()
-paymentChoice.on('message', async (ctx) => {
+paymentChoice.on('callback_query', async (ctx) => {
     try {
         ctx.session.cart = [...new Set(ctx.session.cart)]
         ctx.session.data.comment = ctx.message.text
