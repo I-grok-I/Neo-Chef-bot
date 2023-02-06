@@ -38,7 +38,7 @@ orderType.on('text', async (ctx) => {
             await ctx.replyWithHTML(helloText, 
                     Markup.keyboard(
                         [
-                            ['Меню'],['Корзина']
+                            ['📝МЕНЮ'],['🛒КОРЗИНА']
                         ]
                     ).resize())
             return ctx.scene.leave()
@@ -63,7 +63,7 @@ firstName.on('text', async (ctx) => {
             await ctx.replyWithHTML(helloText, 
                     Markup.keyboard(
                         [
-                            ['Меню'],['Корзина']
+                            ['📝МЕНЮ'],['🛒КОРЗИНА']
                         ]
                     ).resize())
             return ctx.scene.leave()
@@ -97,7 +97,7 @@ number.on('message', async (ctx) => {
                 await ctx.replyWithHTML(helloText, 
                         Markup.keyboard(
                             [
-                                ['Меню'],['Корзина']
+                                ['📝МЕНЮ'],['🛒КОРЗИНА']
                             ]
                         ).resize())
                 return ctx.scene.leave()
@@ -132,7 +132,7 @@ address.on('message', async (ctx) => {
             await ctx.replyWithHTML(helloText, 
             Markup.keyboard(
                 [
-                    ['Меню'],['Корзина']
+                    ['📝МЕНЮ'],['🛒КОРЗИНА']
                 ]
             ).resize())
     return ctx.scene.leave()
@@ -161,7 +161,7 @@ requestGeo.on('message', async (ctx) => {
             await ctx.replyWithHTML(helloText, 
             Markup.keyboard(
                 [
-                    ['Меню'],['Корзина']
+                    ['📝МЕНЮ'],['🛒КОРЗИНА']
                 ]
             ).resize())
     return ctx.scene.leave()
@@ -303,7 +303,7 @@ sendMsgToChanel.on('callback_query', async (ctx) => {
             })
             await ctx.replyWithHTML('Заказ отменён', Markup.keyboard(
                 [
-                    ['Меню'],['Корзина']
+                    ['📝МЕНЮ'],['🛒КОРЗИНА']
                 ]
             ).resize())
                     await ctx.scene.leave()
