@@ -99,7 +99,7 @@ number.on('message', async (ctx) => {
             } else {
                 ctx.session.data.number = ctx.message.text
                 if (ctx.session.data.orderType == '🙋‍♂️Самовывоз') {
-                    await ctx.wizard.selectStep(6)
+                    await ctx.wizard.selectStep(8)
                 }
                 await ctx.replyWithHTML('Адрес доставки? \nНапишите улицу и номер дома')
                 return ctx.wizard.next()
@@ -191,7 +191,7 @@ paymentChoice.on('message', async (ctx) => {
         let sum = cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
                 let discount = 0
                 const date = new Date();
-                if ((date.getHours()+3) >= 20) {
+                if ((date.getHours()+3) >= 20 && (date.getHours()+3) < 24) {
                     sum*= 0.85
                     discount = 15
                 } else if (sum >=500 && sum <1000) {
@@ -239,7 +239,7 @@ sendMsgToChanel.on('callback_query', async (ctx) => {
             let sum = ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
                 let discount = 0
                 const date = new Date();
-                if ((date.getHours()+3) >= 20) {
+                if ((date.getHours()+3) >= 20 && (date.getHours()+3) < 24) {
                     sum*= 0.85
                     discount = 15
                 } else if (sum >=500 && sum <1000) {
