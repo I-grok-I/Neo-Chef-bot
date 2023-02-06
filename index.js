@@ -144,7 +144,7 @@ bot.hears('Меню', async (ctx) => { //при нажатии на меню - �
     }
 })
 const date = new Date()
-bot.hears('a', ctx => ctx.reply(`${date}`))
+bot.hears('a', ctx => ctx.reply(`${date.getHours()}`))
 //enter
 bot.hears('Корзина', async ctx => {
     try {
