@@ -9,6 +9,8 @@ const products = productList.productList
 const startWizard = new Composer()
 startWizard.on('callback_query', async (ctx) => {
     try {
+    console.log(ctx.wizard.steps);
+
         let sum = ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
         ctx.session.data = {}
         await ctx.deleteMessage()
@@ -159,7 +161,7 @@ address.on('message', async (ctx) => {
 
 const requestGeo = new Composer()
 requestGeo.on('message', async (ctx) => {
-    console.log(ctx);
+    console.log(ctx.wizard.steps);
     try {
         if (ctx.message.text == 'Выйти в меню') {
             await ctx.replyWithHTML(helloText, 
