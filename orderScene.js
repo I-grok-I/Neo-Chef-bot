@@ -136,7 +136,7 @@ address.on('message', async (ctx) => {
                 ]
             ).resize())
     return ctx.scene.leave()
-        } else if (!ctx.message.text.includes(/\d/gu)) {
+        } else if (!ctx.message.text.match(/\d/gu)) {
             ctx.reply('Пожалуйста, напишите адрес с номером дома')
         } else { //отменён
         ctx.session.data.address = ctx.message.text
