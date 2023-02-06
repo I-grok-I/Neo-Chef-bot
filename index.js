@@ -159,7 +159,7 @@ bot.hears('Корзина', async ctx => {
         } else {
             let sum = cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
             const date = new Date();
-            if ((date.getHours()+3) >= 18) {
+            if ((date.getHours()+3) >= 20) {
                 sum*= 0.8
             } else if (sum >=500 && sum <1000) {
                 sum = sum/100*97
@@ -167,7 +167,7 @@ bot.hears('Корзина', async ctx => {
                 sum = sum/100*95
             }
             let discount = 0
-            if ((date.getHours()+3) >= 18) {
+            if ((date.getHours()+3) >= 20) {
                 discount = 20
             } else if (sum >=500 && sum <1000) {
                 discount = 3
@@ -273,7 +273,7 @@ ${tappedProduct.content ? 'Состав: ' + tappedProduct.content : ''}`,
                 let sum = cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
                 let discount = 0
                 const date = new Date();
-                if ((date.getHours()+3) >= 18) {
+                if ((date.getHours()+3) >= 20) {
                     sum*= 0.85
                     discount = 15
                 } else if (sum >=500 && sum <1000) {
