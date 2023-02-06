@@ -161,20 +161,16 @@ bot.hears('🛒КОРЗИНА', async ctx => {
                 ]))
         } else {
             let sum = cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
+            let discount = 0
             const date = new Date();
-            if ((date.getHours()+3) >= 20) {
-                sum*= 0.8
+            if ((date.getHours()+3) >= 20 && (date.getHours()+3) < 24) {
+                sum*= 0.85
+                discount = 15
             } else if (sum >=500 && sum <1000) {
                 sum = sum/100*97
-            } else if (sum >=1000) {
-                sum = sum/100*95
-            }
-            let discount = 0
-            if ((date.getHours()+3) >= 20) {
-                discount = 20
-            } else if (sum >=500 && sum <1000) {
                 discount = 3
             } else if (sum >=1000) {
+                sum = sum/100*95
                 discount = 5
             }
             await ctx.replyWithHTML(`🛍<b>Ваш заказ:</b> \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️ ${cart.filter(item => item.count>=1).map(item => '\n'+ "◽" + item.title +' - ['+item.count+'*'+item.price+'|'+item.count*item.price+']')} \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n <b>💳 Общая сумма: ₽${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)}</b>\nСкидка: <b>${discount}%</b>\n<b><ins>Итог:</ins> ₽${Math.round(sum)}</b>`, Markup.inlineKeyboard([

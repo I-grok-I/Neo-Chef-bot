@@ -95,12 +95,9 @@ number.on('message', async (ctx) => {
                         ).resize())
                 return ctx.scene.leave()
             } else if (ctx.message.text.length !== 11 || ctx.message.text.match(/\D/gi)) {
-                ctx.reply('Введите Номер телефона в формате 89123456677')
+                await ctx.reply('Введите Номер телефона в формате 89123456677') 
             } else {
                 ctx.session.data.number = ctx.message.text
-                if (ctx.session.data.orderType == '🙋‍♂️Самовывоз') {
-                    await ctx.wizard.selectStep(8)
-                }
                 await ctx.replyWithHTML('Адрес доставки? \nНапишите улицу и номер дома')
                 return ctx.wizard.next()
             }
@@ -179,6 +176,9 @@ requestGeo.on('message', async (ctx) => {
 
 const paymentChoice = new Composer()
 paymentChoice.on('message', async (ctx) => {
+    if (ctx.session.data.orderType == '🙋‍♂️Самовывоз') {
+        return ctx.wizard.selectStep(1)
+    } else 
     try {
         ctx.session.cart = [...new Set(ctx.session.cart)]
         ctx.session.data.comment = ctx.message.text
