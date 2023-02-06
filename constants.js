@@ -32,7 +32,7 @@ module.exports.STOPLIST = STOPLIST
 const CAFE_NUM = `По всем вопросам вы можете обращаться по номеру <pre><b>89283090099</b></pre>`
 module.exports.CAFE_NUM = CAFE_NUM
 
-const CAFE_ADDRESS = `Адрес: <b>ул. Тотурбиева 133</b>`
+const CAFE_ADDRESS = `Адрес: <b>ул. Тотурбиева 133</b>\n Работаем с 9:00 до 23:00`
 module.exports.CAFE_ADDRESS = CAFE_ADDRESS
 
 const date = new Date();
