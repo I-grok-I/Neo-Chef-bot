@@ -92,10 +92,11 @@ firstName.on('text', async (ctx) => {
 const number = new Composer()
 number.on('message', async (ctx) => {
     try {
-        if (ctx.message.text) {
-            if (ctx.session.data.orderType === '🙋‍♂️Самовывоз') { //Если пользователь выбрал самовывоз - пропускаем шаг
-                ctx.wizard.next()
-            } else if (ctx.message.text == 'Выйти в меню') {
+        if (ctx.session.data.orderType === '🙋‍♂️Самовывоз') { //Если пользователь выбрал самовывоз - пропускаем шаг
+            ctx.wizard.next()
+        } else {
+        } if (ctx.message.text) {
+              if (ctx.message.text == 'Выйти в меню') {
                 await ctx.replyWithHTML(helloText, 
                         Markup.keyboard(
                             [
@@ -122,6 +123,7 @@ number.on('message', async (ctx) => {
             ]).resize())
             return ctx.wizard.next()
         }
+            
     } catch (error) {
         console.log(error.message);
     }
