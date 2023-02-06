@@ -305,10 +305,10 @@ bot.command('stoplist', async (ctx) => {
     await ctx.reply(STOPLIST)
 })
 bot.command('num', async (ctx) => {
-    await ctx.replyWithHTML(CAFE_NUM)
+    await ctx.replyWithHTML(`${CAFE_NUM}`)
 })
 bot.command('add', async (ctx) => {
-    await ctx.replyWithHTML(CAFE_ADDRESS)
+    await ctx.replyWithHTML(`${CAFE_ADDRESS}`)
 })
 
 
