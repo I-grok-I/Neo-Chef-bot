@@ -10,7 +10,7 @@ const startWizard = new Composer()
 startWizard.on('callback_query', async (ctx) => {
     try {
     console.log(ctx.wizard.steps);
-    return ctx.wizard.selectStep(5)
+    returnctx.wizard.selectStep(5)
 
         let sum = ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
         ctx.session.data = {}
@@ -173,7 +173,7 @@ requestGeo.on('message', async (ctx) => {
             ).resize())
     return ctx.scene.leave()
         } else {
-            ctx.session.data.geo = ctx.message.location || ctx.message.text
+            ctx.session.data.geo = ctx.message.location || ctx.message.text || null
         await ctx.reply('Оставить комментарий?', Markup.keyboard(
             ['Без комментария']
             ).resize())
