@@ -92,11 +92,8 @@ firstName.on('text', async (ctx) => {
 const number = new Composer()
 number.on('message', async (ctx) => {
     try {
-        if (ctx.session.data.orderType === '🙋‍♂️Самовывоз') { //Если пользователь выбрал самовывоз - пропускаем шаг
-            return ctx.wizard.next()
-        }
         if (ctx.message.text) {
-              if (ctx.message.text == 'Выйти в меню') {
+            if (ctx.message.text == 'Выйти в меню') {
                 await ctx.replyWithHTML(helloText, 
                         Markup.keyboard(
                             [
