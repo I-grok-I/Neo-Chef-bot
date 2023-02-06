@@ -9,9 +9,11 @@ const products = productList.productList
 const startWizard = new Composer()
 startWizard.on('callback_query', async (ctx) => {
     try {
+        let sum = ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
+        `Внимание! Для бесплатной доставки вам нужно добавить в корзину товаров ещё на ${500-sum}`
         ctx.session.data = {}
         await ctx.deleteMessage()
-        await ctx.reply('Выберите способ достаки', Markup.keyboard([
+        await ctx.reply(`${ sum>500? 'Выберите способ доставки': `Внимание! Для бесплатной доставки вам нужно добавить в корзину товаров ещё на ${500-sum}`}`, Markup.keyboard([
             ['🚗Доставка', '🙋‍♂️Самовывоз'],
             ['Выйти в меню']
         ]).resize())
@@ -285,7 +287,7 @@ sendMsgToChanel.on('callback_query', async (ctx) => {
                     [Markup.button.callback('Отменён', 'cancelled')],
                 ]
             })
-            await ctx.replyWithHTML('Заказ отменён',Markup.keyboard(
+            await ctx.replyWithHTML('Заказ отменён', Markup.keyboard(
                 [
                     ['Меню'],['Корзина']
                 ]
