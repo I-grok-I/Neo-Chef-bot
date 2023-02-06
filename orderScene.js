@@ -10,7 +10,6 @@ const startWizard = new Composer()
 startWizard.on('callback_query', async (ctx) => {
     try {
         let sum = ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
-        `Внимание! Для бесплатной доставки вам нужно добавить в корзину товаров ещё на ${500-sum}`
         ctx.session.data = {}
         await ctx.deleteMessage()
         await ctx.reply(`${ sum>500? 'Выберите способ доставки': `Внимание! Для бесплатной доставки вам нужно добавить в корзину товаров ещё на ${500-sum}`}`, Markup.keyboard([
