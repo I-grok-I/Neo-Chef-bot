@@ -58,27 +58,20 @@ orderType.on('text', async (ctx) => {
 //если всё норм, сохраняю сообщение в session.data.name и перехожу дальше
 const firstName = new Composer()
 firstName.on('text', async (ctx) => {
-    try {
-        if (ctx.message.text == 'Выйти в меню') {
-            await ctx.replyWithHTML(helloText, 
-                    Markup.keyboard(
-                        [
-                            ['📝МЕНЮ'],['🛒КОРЗИНА']
-                        ]
-                    ).resize())
-            return ctx.scene.leave()
-        }else if (ctx.message.text.length<3 || ctx.message.text.match(/\P{L}/giu)) {
+    try { 
+        if (ctx.message.text.length<3 || ctx.message.text.match(/\P{L}/giu)) {
             ctx.reply('Введите имя!')
+        } else if (ctx.message.text == 'Выйти в меню') {
+            await ctx.replyWithHTML(helloText, Markup.keyboard([ ['📝МЕНЮ'],['🛒КОРЗИНА'] ]).resize())
+            return ctx.scene.leave()
         } else {
             ctx.session.data.name = ctx.message.text
             ctx.session.data.user = ctx.message.from.id
             await ctx.reply("Отправьте номер для связи", Markup.keyboard([ 
-                [
-                  {
-                     text: "Отправить одним касанием 📞",
-                     request_contact: true
-                  }
-               ], ['Выйти в меню']
+                [{
+                    text: "Отправить одним касанием 📞",
+                    request_contact: true
+                }], ['Выйти в меню'] 
             ]).resize());
             return ctx.wizard.next()
         }
@@ -105,6 +98,9 @@ number.on('message', async (ctx) => {
                 ctx.reply('Введите Номер телефона в формате 89123456677')
             } else {
                 ctx.session.data.number = ctx.message.text
+                if (ctx.session.data.orderType == '🙋‍♂️Самовывоз') {
+                    ctx.wizard.selectStep(6)
+                }
                 await ctx.replyWithHTML('Адрес доставки? \nНапишите улицу и номер дома')
                 return ctx.wizard.next()
             }
@@ -137,7 +133,7 @@ address.on('message', async (ctx) => {
             ).resize())
     return ctx.scene.leave()
         } else if (!ctx.message.text.match(/\d/gu)) {
-            ctx.reply('Пожалуйста, напишите адрес с номером дома')
+            ctx.replyWithHTML('Пожалуйста, напишите адрес <b>с номером дома</b>')
         } else { //отменён
         ctx.session.data.address = ctx.message.text
         await ctx.reply('Оставить геопозицию?', Markup.keyboard([

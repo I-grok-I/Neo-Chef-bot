@@ -19,8 +19,7 @@ bot.use(stage.middleware());
 //+++++++++++++++++++++
 
 
-
-
+bot.hears('foo', ctx => ctx.scene.enter('orderScene'))
 
 
 
