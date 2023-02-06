@@ -1,6 +1,6 @@
 const { Telegraf, Markup, Composer, Scenes, session} = require('telegraf');
 require('dotenv').config();
-const bot = new Telegraf('5856492718:AAFYH9lDst1Jy1Itou4EINFXUwYTpUoBDUo');
+const bot = new Telegraf(process.env.BOT_TOKEN);
 const productList = require('./productList.js')
 const products = productList.productList
 const btns = require('./constants.js');
@@ -123,11 +123,7 @@ bot.action(products.map(product => product.categoryId), async (ctx) => {
 bot.start((ctx) => {
     try {
         ctx.replyWithHTML(
-`<b>Добро пожаловать в Нео Шеф!
- Заказ еды в пару кликов</b>
-◽Автоматическое начисление бонусов в размере 3% от суммы
-◽За покупку свыше 300₽ - скидка 3%, свыше 500₽ - 5%
-◽Бесплатная доставка по городу от 500₽`, 
+btns.helloText, 
         Markup.keyboard(
             [
                 ['Меню'],['Корзина']
