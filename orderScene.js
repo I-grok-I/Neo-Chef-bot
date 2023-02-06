@@ -184,6 +184,7 @@ paymentChoice.on('message', async (ctx) => {
     try {
         ctx.session.cart = [...new Set(ctx.session.cart)]
         ctx.session.data.comment = ctx.message.text
+        let cart = ctx.session.cart
         let k = 0;
         for(let i = 0; i < 3; i++ ){
             k =  ctx.message.message_id-i;
@@ -237,7 +238,7 @@ sendMsgToChanel.on('callback_query', async (ctx) => {
         try {
             ctx.session.data.userId = ctx.callbackQuery.from.id
             // console.log(ctx.callbackQuery)
-            let sum = cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
+            let sum = ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
                 let discount = 0
                 const date = new Date();
                 if ((date.getHours()+3) >= 18) {
