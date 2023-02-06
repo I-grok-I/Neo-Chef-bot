@@ -232,12 +232,24 @@ sendMsgToChanel.on('callback_query', async (ctx) => {
             ctx.session.data.userId = ctx.callbackQuery.from.id
             // console.log(ctx.callbackQuery)
             let sum = ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
-            if (sum >=500 && sum <1000) {sum = sum/100*97}
-            else if (sum >=1000) {sum = sum/100*95}
+            const date = new Date();
+            if (date.getHours() >= 20) {
+                sum*= 0.8
+            } else {
+                if (sum >=500 && sum <1000) {
+                    sum *= 0.97
+                } else if (sum >=1000) {
+                    sum*=0.95
+                }
+            }
         
             let discount = 0
-            if (sum >=500 && sum <1000) {discount = 3}
-            else if (sum >=1000) {discount = 5}
+            if (date.getHours >= 20) {
+                discount = 20
+            } else {
+                if (sum >=500 && sum <1000) {discount = 3}
+                else if (sum >=1000) {discount = 5}
+            }
         
             const data = ctx.update.callback_query.data;
             if (data == 'finallyConfirm') {
