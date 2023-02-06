@@ -159,7 +159,7 @@ bot.hears('Корзина', async ctx => {
         } else {
             let sum = cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
             const date = new Date();
-            if (date.getHours() >= 18) {
+            if ((date.getHours()+3) >= 18) {
                 sum*= 0.8
             } else if (sum >=500 && sum <1000) {
                 sum = sum/100*97
@@ -167,7 +167,7 @@ bot.hears('Корзина', async ctx => {
                 sum = sum/100*95
             }
             let discount = 0
-            if (date.getHours() >= 18) {
+            if ((date.getHours()+3) >= 18) {
                 discount = 20
             } else if (sum >=500 && sum <1000) {
                 discount = 3
@@ -271,11 +271,22 @@ ${tappedProduct.content ? 'Состав: ' + tappedProduct.content : ''}`,
                     ]))
             } else {
                 let sum = cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
-                if (sum >=500 && sum <1000) {sum = sum/100*97}
-                else if (sum >=1000) {sum = sum/100*95}
-                let discount = 0
-                if (sum >=500 && sum <1000) {discount = 3}
-                else if (sum >=1000) {discount = 5}
+            const date = new Date();
+            if ((date.getHours()+3) >= 18) {
+                sum*= 0.8
+            } else if (sum >=500 && sum <1000) {
+                sum = sum/100*97
+            } else if (sum >=1000) {
+                sum = sum/100*95
+            }
+            let discount = 0
+            if ((date.getHours()+3) >= 18) {
+                discount = 20
+            } else if (sum >=500 && sum <1000) {
+                discount = 3
+            } else if (sum >=1000) {
+                discount = 5
+            }
                 await ctx.replyWithHTML(`🛍<b>Ваш заказ:</b> \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️ ${cart.filter(item => item.count>=1).map(item => '\n'+ "◽" + item.title +  ' - ['+item.count+'*'+item.price+'|'+item.count*item.price+']')} \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n <b>💳 Общая сумма: ₽${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)}</b>\nСкидка: <b>${discount}%</b>\n<b><ins>Итог:</ins> ₽${Math.round(sum)}</b>`, Markup.inlineKeyboard([
                     [Markup.button.callback(`✅ Перейти к оплате`, 'submitOrder')],
                     [Markup.button.callback(`❌ Отменить заказ`, 'cancelOrder')],
