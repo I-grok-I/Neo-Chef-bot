@@ -127,7 +127,7 @@ number.on('message', async (ctx) => {
 //тут спрашиваю адрес. Потом спрашиваю хочет ли юзер отправить гео и отправляю клавиатуру с кнопкой оправки гео и с кнопкой "нет"
 const address = new Composer()
 address.on('message', async (ctx) => { 
-    console.log(ctx);
+    console.log(ctx.wizard);
     try {
         if (ctx.message.text == 'Выйти в меню') {
             await ctx.replyWithHTML(helloText, 
