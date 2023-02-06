@@ -6,6 +6,9 @@ const products = productList.productList
 const btns = require('./constants.js');
 const GARNISH_MEAL_IDS = btns.GARNISH_MEAL_IDS
 const STOPLIST = btns.STOPLIST
+const CAFE_NUM = btns.CAFE_NUM
+const CAFE_ADDRESS = btns.CAFE_ADDRESS
+
 // const GARNISH_MEAL_IDS = products.filter(item => item.garnish).map(item => item.id)
 
 //+++++++++++++++++++++
