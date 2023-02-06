@@ -302,13 +302,13 @@ ${tappedProduct.content ? 'Состав: ' + tappedProduct.content : ''}`,
 //________________________________CALLBACK QUERY_____END
 
 bot.command('stoplist', async (ctx) => {
-ctx.reply(STOPLIST)
+    await ctx.reply(STOPLIST)
 })
 bot.command('num', async (ctx) => {
-    ctx.replyWithHTML(CAFE_NUM)
+    await ctx.replyWithHTML(CAFE_NUM)
 })
 bot.command('add', async (ctx) => {
-    ctx.replyWithHTML(CAFE_ADDRESS)
+    await ctx.replyWithHTML(CAFE_ADDRESS)
 })
 
 
