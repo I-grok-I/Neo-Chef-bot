@@ -272,7 +272,7 @@ ${tappedProduct.content ? 'Состав: ' + tappedProduct.content : ''}`,
                 let sum = cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
                 let discount = 0
                 const date = new Date();
-                if ((date.getHours()+3) >= 20) {
+                if ((date.getHours()+3) >= 20 && (date.getHours()+3) < 24) {
                     sum*= 0.85
                     discount = 15
                 } else if (sum >=500 && sum <1000) {

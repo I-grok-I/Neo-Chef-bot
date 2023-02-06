@@ -98,6 +98,13 @@ number.on('message', async (ctx) => {
                 await ctx.reply('Введите Номер телефона в формате 89123456677') 
             } else {
                 ctx.session.data.number = ctx.message.text
+                if (ctx.session.data.orderType === '🙋‍♂️Самовывоз')  {
+                    await ctx.reply('Оставить комментарий?', Markup.keyboard(
+                        ['Без комментария']
+                        ).resize())
+                    return ctx.wizard.selectStep(7)
+
+                }
                 await ctx.replyWithHTML('Адрес доставки? \nНапишите улицу и номер дома')
                 return ctx.wizard.next()
             }
