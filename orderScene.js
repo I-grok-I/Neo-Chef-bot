@@ -218,7 +218,7 @@ paymentChoice.on('message', async (ctx) => {
 <a href="https://t.me/NeoChef2">Отправить чек об оплате</a>
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
 Вам автоматически начислены бонусы на следующую покупку - ₽${(Math.round(sum*0.03))}🔸
-`, Markup.inlineKeyboard(
+`, {disable_web_page_preview: true}, Markup.inlineKeyboard(
         [
             [Markup.button.callback('✅Подтвердить заказ', 'finallyConfirm')],
             [Markup.button.callback('❌Отменить заказ', 'finallyReject')]
