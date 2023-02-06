@@ -143,7 +143,8 @@ bot.hears('Меню', async (ctx) => { //при нажатии на меню - �
         console.log(error.message);
     }
 })
-
+const date = new Date()
+bot.hears('a', ctx => ctx.reply(`${date}`))
 //enter
 bot.hears('Корзина', async ctx => {
     try {
