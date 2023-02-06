@@ -175,10 +175,7 @@ requestGeo.on('message', async (ctx) => {
 
 
 const paymentChoice = new Composer()
-paymentChoice.on('message', async (ctx) => {
-    if (ctx.session.data.orderType == '🙋‍♂️Самовывоз') {
-        return ctx.wizard.selectStep(1)
-    } else 
+paymentChoice.on('message', async (ctx) => { 
     try {
         ctx.session.cart = [...new Set(ctx.session.cart)]
         ctx.session.data.comment = ctx.message.text
