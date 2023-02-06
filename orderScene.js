@@ -10,7 +10,7 @@ const startWizard = new Composer()
 startWizard.on('callback_query', async (ctx) => {
     try {
     console.log(ctx.wizard.steps);
-    returnctx.wizard.selectStep(5)
+    return ctx.wizard.selectStep(5)
 
         let sum = ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
         ctx.session.data = {}
