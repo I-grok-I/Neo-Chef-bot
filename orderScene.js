@@ -98,13 +98,13 @@ number.on('message', async (ctx) => {
                 await ctx.reply('Введите Номер телефона в формате 89123456677') 
             } else {
                 ctx.session.data.number = ctx.message.text
-                if (ctx.session.data.orderType === '🙋‍♂️Самовывоз')  {
-                    await ctx.reply('Оставить комментарий?', Markup.keyboard(
-                        ['Без комментария']
-                        ).resize())
-                    return ctx.wizard.selectStep(8)
+                // if (ctx.session.data.orderType === '🙋‍♂️Самовывоз')  {
+                //     await ctx.reply('Оставить комментарий?', Markup.keyboard(
+                //         ['Без комментария']
+                //         ).resize())
+                //     return ctx.wizard.selectStep(8)
 
-                }
+                // }
                 await ctx.replyWithHTML('Адрес доставки? \nНапишите улицу и номер дома')
                 return ctx.wizard.next()
             }
@@ -127,6 +127,7 @@ number.on('message', async (ctx) => {
 //тут спрашиваю адрес. Потом спрашиваю хочет ли юзер отправить гео и отправляю клавиатуру с кнопкой оправки гео и с кнопкой "нет"
 const address = new Composer()
 address.on('message', async (ctx) => { 
+    console.log(ctx);
     try {
         if (ctx.message.text == 'Выйти в меню') {
             await ctx.replyWithHTML(helloText, 
@@ -158,6 +159,7 @@ address.on('message', async (ctx) => {
 
 const requestGeo = new Composer()
 requestGeo.on('message', async (ctx) => {
+    console.log(ctx);
     try {
         if (ctx.message.text == 'Выйти в меню') {
             await ctx.replyWithHTML(helloText, 
