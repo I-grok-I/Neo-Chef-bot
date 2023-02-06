@@ -92,7 +92,8 @@ firstName.on('text', async (ctx) => {
 const number = new Composer()
 number.on('message', async (ctx) => {
     try {
-        if (ctx.message.text) {
+        if(ctx.session.data.orderType == '🚗Доставка') {
+            if (ctx.message.text) {
             if (ctx.message.text == 'Выйти в меню') {
                 await ctx.replyWithHTML(helloText, 
                         Markup.keyboard(
@@ -105,9 +106,7 @@ number.on('message', async (ctx) => {
                 ctx.reply('Введите Номер телефона в формате 89123456677')
             } else {
                 ctx.session.data.number = ctx.message.text
-                if (ctx.session.data.orderType == '🙋‍♂️Самовывоз') {
-                    return ctx.scene.enter('requestGeo')
-                } else await ctx.replyWithHTML('Адрес доставки? \nНапишите улицу и номер дома')
+                await ctx.replyWithHTML('Адрес доставки? \nНапишите улицу и номер дома')
                 return ctx.wizard.next()
             }
         } else {
@@ -122,6 +121,28 @@ number.on('message', async (ctx) => {
             ]).resize())
             return ctx.wizard.next()
         }
+        } else {
+            if (ctx.message.text) {
+                if (ctx.message.text == 'Выйти в меню') {
+                    await ctx.replyWithHTML(helloText, 
+                            Markup.keyboard(
+                                [
+                                    ['📝МЕНЮ'],['🛒КОРЗИНА']
+                                ]
+                            ).resize())
+                    return ctx.scene.leave()
+                } else if (ctx.message.text.length !== 11 || ctx.message.text.match(/\D/gi)) {
+                    ctx.reply('Введите Номер телефона в формате 89123456677')
+                } else {
+                    ctx.session.data.number = ctx.message.text
+                    return ctx.wizard.next()
+                }
+            } else {
+                ctx.session.data.number = ctx.message.contact.phone_number
+                return ctx.wizard.next()
+            }
+        }
+        
     } catch (error) {
         console.log(error.message);
     }
@@ -159,7 +180,7 @@ address.on('message', async (ctx) => {
 })
 
 const requestGeo = new Composer()
-requestGeo.on('callback_query', async (ctx) => {
+requestGeo.on('message', async (ctx) => {
     try {
         if (ctx.message.text == 'Выйти в меню') {
             await ctx.replyWithHTML(helloText, 
