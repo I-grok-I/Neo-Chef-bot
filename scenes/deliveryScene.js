@@ -24,7 +24,7 @@ const orderType = new Composer()
 orderType.on('text', async (ctx) => {
     try {
         if (ctx.message.text === '💳Перевод' || ctx.message.text === '💰Наличные') {
-            ctx.session.data.orderType = ctx.message.text
+            ctx.session.data.payment = ctx.message.text
             await ctx.reply('Напишите имя', Markup.keyboard( [['Выйти в меню']] ).resize())
             await ctx.wizard.next()
         } else if (ctx.message.text == 'Выйти в меню') {
@@ -201,7 +201,7 @@ paymentChoice.on('message', async (ctx) => {
 Способ доставки: ${ctx.session.data.orderType}
 Комментарий: ${ctx.session.data.comment}
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
-${ctx.session.data.orderType == '💳Перевод'? `Переведите ${Math.round(sum)}₽ по номеру <pre>89883090099</pre>
+${ctx.session.data.payment == '💳Перевод'? `Переведите ${Math.round(sum)}₽ по номеру <pre>89883090099</pre>
 <a href="https://t.me/NeoChef2">Отправить чек об оплате</a>`:'Оплата: 💰Наличные'}
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
 Вам автоматически начислены бонусы на следующую покупку - ₽${(Math.round(sum*0.03))}🔸
