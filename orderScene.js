@@ -273,7 +273,7 @@ sendMsgToChanel.on('callback_query', async (ctx) => {
 └Имя: ${ctx.session.data.name}
 └Номер: <pre>${ctx.session.data.number}</pre>
 └Адрес: ${ctx.session.data.address}
-└<a href="tg://user?id=${ctx.session.data.user}">Написать заказчику</a>
+└<a href="tg://user?id=${ctx.session.data.user}">✉️Написать заказчику</a>
 Способ доставки: ${ctx.session.data.orderType}
 Комментарий: ${ctx.session.data.comment}
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
