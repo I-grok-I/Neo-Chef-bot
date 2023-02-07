@@ -14,7 +14,8 @@ const CAFE_ADDRESS = btns.CAFE_ADDRESS
 //+++++++++++++++++++++
 const orderScene = require('./orderScene');
 const deliveryScene = require('./scenes/deliveryScene');
-const stage = new Scenes.Stage([deliveryScene])
+const onplaceScene = require('./scenes/onplaceScene');
+const stage = new Scenes.Stage([deliveryScene], [onplaceScene])
 bot.use(session());
 bot.use(stage.middleware());
 //+++++++++++++++++++++
@@ -87,7 +88,7 @@ bot.action(GARNISH_MEAL_IDS, async (ctx) => {
 
 
 
-//меню, которое всплывёт для напитков (сделано мануально для нормального расположения кнопок)
+//меню, которое всплывёт для напитков (сделано мануально для нормального расположения кнопок) cart
 bot.action('drinks', async (ctx) => {
     try {
         await ctx.answerCbQuery();
@@ -175,7 +176,8 @@ bot.hears('🛒КОРЗИНА', async ctx => {
                 sum = sum/100*95
                 discount = 5
             }
-            await ctx.replyWithHTML(`🛍<b>Ваш заказ:</b> \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️ ${cart.filter(item => item.count>=1).map(item => '\n'+ "◽" + item.title +' - ['+item.count+'*'+item.price+'|'+item.count*item.price+']')} \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n <b>💳 Общая сумма: ₽${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)}</b>\nСкидка: <b>${discount}%</b>\n<b><ins>Итог:</ins> ₽${Math.round(sum)}</b>`, Markup.inlineKeyboard([
+            await ctx.replyWithHTML(`🛍<b>Ваш заказ:</b> \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️ ${cart.filter(item => item.count>=1).map(item => '\n'+ "◽" + item.title +' - ['+item.count+'*'+item.price+'|'+item.count*item.price+']')} \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n <b>💳 Общая сумма: ₽${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)}</b>\nСкидка: <b>${discount}%</b>\n<b><ins>Итог:</ins> ₽${Math.round(sum)}</b>
+${sum>500?'\n<b>Бесплатная доставка по городу</b>':`\n<i>Для бесплатной доставки закажите товаров еще на ${500-sum}₽</i>`}`, Markup.inlineKeyboard([
             [Markup.button.callback(`✅ Перейти к оплате`, 'submitOrder')],
             [Markup.button.callback(`❌ Отменить заказ`, 'cancelOrder')],
             [Markup.button.callback(`🔙В категории`, 'menu')]
@@ -214,7 +216,7 @@ bot.hears('🚗Доставка', async (ctx) => {
 
 bot.hears('🙋‍♂️Самовывоз', async (ctx) => {
     try {
-        await ctx.reply('В разработке.')
+        await ctx.scene.enter('onplaceScene')
         
     } catch (e) {
         console.log(e.message);
