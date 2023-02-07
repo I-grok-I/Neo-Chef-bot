@@ -6,17 +6,35 @@ const productList = require('../productList')
 const products = productList.productList
 
 
+const payment = new Composer()
+payment.on('text', async (ctx) => {
+    try {
+        ctx.session.data = {}
+        ctx.session.data.orderType = '🚗Доставка'
+        await ctx.reply('Выберите способ оплаты', Markup.keyboard( [['💳Перевод', '💰Наличные'], ['Выйти в меню']] ).resize())
+        await ctx.wizard.next()
+        }
+    catch (error) {
+        console.log(error.message);
+    }
+})
 
 //шаг доставки. Тут сохраняю в orderType прошлое сообщение (способ доставки) и спрашиваю имя.
 const orderType = new Composer()
 orderType.on('text', async (ctx) => {
     try {
-        ctx.session.data = {}
-        ctx.session.data.orderType = '🚗Доставка'
-        await ctx.reply('Напишите имя', Markup.keyboard( [['Выйти в меню']] ).resize())
+        if (ctx.message.text === '💳Перевод' || ctx.message.text === '💰Наличные') {
+            ctx.session.data.orderType = ctx.message.text
+            await ctx.reply('Напишите имя', Markup.keyboard( [['Выйти в меню']] ).resize())
+            await ctx.wizard.next()
+        } else if (ctx.message.text == 'Выйти в меню') {
+            await ctx.replyWithHTML(helloText, Markup.keyboard([ ['📝МЕНЮ'],['🛒КОРЗИНА'] ]).resize())
+            return ctx.scene.leave()
+        } else {
+        await ctx.reply('Выберите способ оплаты', Markup.keyboard( [['💳Перевод', '💰Наличные'], ['Выйти в меню']] ).resize())
         await ctx.wizard.next()
         }
-    catch (error) {
+    } catch (error) {
         console.log(error.message);
     }
 })
@@ -183,8 +201,8 @@ paymentChoice.on('message', async (ctx) => {
 Способ доставки: ${ctx.session.data.orderType}
 Комментарий: ${ctx.session.data.comment}
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
-Для оплаты переводом переведите ${Math.round(sum)}₽ по номеру <pre>89883090099</pre>
-<a href="https://t.me/NeoChef2">Отправить чек об оплате</a>
+${ctx.session.data.orderType == '💳Перевод'? `Переведите ${Math.round(sum)}₽ по номеру <pre>89883090099</pre> и отправьте чек.
+<a href="https://t.me/NeoChef2">Отправить чек об оплате</a>`:'Оплата: 💰Наличные'}
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
 Вам автоматически начислены бонусы на следующую покупку - ₽${(Math.round(sum*0.03))}🔸
 `, Markup.inlineKeyboard(
@@ -243,6 +261,7 @@ sendMsgToChanel.on('callback_query', async (ctx) => {
 └Адрес: ${ctx.session.data.address}
 └✉️<a href="tg://user?id=${ctx.session.data.user}">Написать заказчику</a>
 Способ доставки: ${ctx.session.data.orderType}
+Способ оплаты: ${ctx.session.data.orderType}
 Комментарий: ${ctx.session.data.comment}
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
 `, {
