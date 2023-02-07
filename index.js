@@ -13,7 +13,8 @@ const CAFE_ADDRESS = btns.CAFE_ADDRESS
 
 //+++++++++++++++++++++
 const orderScene = require('./orderScene');
-const stage = new Scenes.Stage([orderScene])
+const deliveryScene = require('./scenes/deliveryScene');
+const stage = new Scenes.Stage([orderScene, deliveryScene])
 bot.use(session());
 bot.use(stage.middleware());
 //+++++++++++++++++++++
@@ -202,11 +203,23 @@ bot.action('menu', ctx => {
 
 
 bot.hears('🚗Доставка', async (ctx) => {
-    await ctx.scene.enter('delivertyScene')
+    try {
+        await ctx.scene.enter('delivertyScene')
+        
+    } catch (e) {
+        console.log(e.message);
+    }
 })
 
 
-
+bot.hears('🙋‍♂️Самовывоз', async (ctx) => {
+    try {
+        await ctx.reply('В разработке.')
+        
+    } catch (e) {
+        console.log(e.message);
+    }
+})
 
 
 

@@ -6,50 +6,17 @@ const productList = require('./productList')
 const products = productList.productList
 
 
-//инициализирую ctx.session.data, спрашиваю о способе доставки. тут вроде ок
-const startWizard = new Composer()
-startWizard.on('callback_query', async (ctx) => {
-    try {
-        let sum = ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
-        ctx.session.data = {}
-        await ctx.deleteMessage()
-        await ctx.replyWithHTML(`${ sum>500? 'Выберите способ доставки': `
-<b>Выберите способ доставки</b>
-<i>Внимание! Для бесплатной доставки наберите товаров еще на ${500-sum}₽</i>`}`, Markup.keyboard([
-            ['🚗Доставка', '🙋‍♂️Самовывоз'],
-            ['Выйти в меню']
-        ]).resize())
-         return ctx.wizard.next()
-    } catch (error) {
-        console.log(error.message);
-    }
-})
 
 //шаг доставки. Тут сохраняю в orderType прошлое сообщение (способ доставки) и спрашиваю имя.
 const orderType = new Composer()
 orderType.on('text', async (ctx) => {
     try {
-        if (ctx.message.text === '🚗Доставка' || ctx.message.text === '🙋‍♂️Самовывоз') {
-            ctx.session.data.orderType = ctx.message.text
-        await ctx.reply('Напишите имя', Markup.keyboard([
-            ['Выйти в меню']
-        ]).resize())
-        return ctx.wizard.next()
-        } else if (ctx.message.text == 'Выйти в меню') {
-            await ctx.replyWithHTML(helloText, 
-                    Markup.keyboard(
-                        [
-                            ['📝МЕНЮ'],['🛒КОРЗИНА']
-                        ]
-                    ).resize())
-            return ctx.scene.leave()
-        } else {
-            await ctx.reply('Выберите способ доставки', Markup.keyboard([
-                ['🚗Доставка', '🙋‍♂️Самовывоз']
-            ]).resize())
-            
+        ctx.session.data = {}
+        ctx.session.data.orderType = '🚗Доставка'
+        await ctx.reply('Напишите имя', Markup.keyboard( [['Выйти в меню']] ).resize())
+        await ctx.wizard.next()
         }
-    } catch (error) {
+    catch (error) {
         console.log(error.message);
     }
 })
@@ -315,7 +282,7 @@ sendMsgToChanel.on('callback_query', async (ctx) => {
 })
 
 
-const orderScene = new Scenes.WizardScene('orderScene', startWizard, orderType, firstName, number, address, requestGeo, paymentChoice, sendMsgToChanel )
+const deliveryScene = new Scenes.WizardScene('deliveryScene', orderType, firstName, number, address, requestGeo, paymentChoice, sendMsgToChanel )
 
 
-module.exports = orderScene
+module.exports = deliveryScene
