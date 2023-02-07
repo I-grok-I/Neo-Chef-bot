@@ -307,7 +307,7 @@ ${tappedProduct.content ? 'Состав: ' + tappedProduct.content : ''}`,
                 await ctx.replyWithHTML(`
 🛍<b>Ваш заказ:</b> 
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️ 
-${cart.filter(item => item.count>=1).map(item => '\n'+ "◽" + item.title +  ' - ['+item.count+'*'+item.price+'| '+item.count*item.price+']')} 
+${cart.filter(item => item.count>=1).map(item => "◽" + item.title +  ' - ['+item.count+'*'+item.price+'| '+item.count*item.price+']')} 
 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
 <b>💳 Общая сумма: ₽${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)}</b>
 Скидка: <b>${discount}%</b>
