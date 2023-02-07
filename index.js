@@ -145,7 +145,7 @@ bot.hears('📝МЕНЮ', async (ctx) => { //при нажатии на 📝МЕ
     }
 })
 const date = new Date()
-bot.hears('a', ctx => ctx.reply(`${date.getHoursUTC()+3}`))
+bot.hears('a', ctx => ctx.reply(`${date.getUTCHours()+3}`))
 //enter
 bot.hears('🛒КОРЗИНА', async ctx => {
     try {
