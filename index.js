@@ -15,7 +15,7 @@ const CAFE_ADDRESS = btns.CAFE_ADDRESS
 const orderScene = require('./orderScene');
 const deliveryScene = require('./scenes/deliveryScene');
 const onplaceScene = require('./scenes/onplaceScene');
-const stage = new Scenes.Stage([deliveryScene], [onplaceScene])
+const stage = new Scenes.Stage([deliveryScene, onplaceScene])
 bot.use(session());
 bot.use(stage.middleware());
 //+++++++++++++++++++++
