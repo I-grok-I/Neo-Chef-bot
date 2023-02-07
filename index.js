@@ -14,7 +14,7 @@ const CAFE_ADDRESS = btns.CAFE_ADDRESS
 //+++++++++++++++++++++
 const orderScene = require('./orderScene');
 const deliveryScene = require('./scenes/deliveryScene');
-const stage = new Scenes.Stage([orderScene, deliveryScene])
+const stage = new Scenes.Stage([deliveryScene])
 bot.use(session());
 bot.use(stage.middleware());
 //+++++++++++++++++++++
@@ -204,7 +204,7 @@ bot.action('menu', ctx => {
 
 bot.hears('🚗Доставка', async (ctx) => {
     try {
-        await ctx.scene.enter('delivertyScene')
+        await ctx.scene.enter('deliveryScene')
         
     } catch (e) {
         console.log(e.message);
