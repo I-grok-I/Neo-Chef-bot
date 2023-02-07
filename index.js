@@ -139,6 +139,9 @@ btns.helloText,
 bot.hears('📝МЕНЮ', async (ctx) => { //при нажатии на 📝МЕНЮ - отправляю категории продуктов в мануально настроенном формате. колбеки кнопок 📝МЕНЮ равны categoryId продуктов.
     try {
         await ctx.deleteMessage()
+        await ctx.reply('Нео Шеф', Markup.keyboard([
+            ['📝МЕНЮ'],['🛒КОРЗИНА']
+        ]).resize())
         await ctx.reply('Выберите категорию', Markup.inlineKeyboard(btns.categoryBtns))
     } catch (error) {
         console.log(error.message);
