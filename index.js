@@ -19,8 +19,6 @@ bot.use(stage.middleware());
 //+++++++++++++++++++++
 
 
-bot.hears('foo', ctx => ctx.scene.enter('orderScene'))
-
 
 
 //Хэндлеры для канала. То, что будет происходить при нажатии на "Оплачен" или "Отклонён"
@@ -147,7 +145,7 @@ bot.hears('📝МЕНЮ', async (ctx) => { //при нажатии на 📝МЕ
     }
 })
 const date = new Date()
-bot.hears('a', ctx => ctx.reply(`${date.getHours()+3}`))
+bot.hears('a', ctx => ctx.reply(`${date.getHoursUTC()+3}`))
 //enter
 bot.hears('🛒КОРЗИНА', async ctx => {
     try {
