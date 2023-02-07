@@ -301,7 +301,7 @@ sendMsgToChanel.on('callback_query', async (ctx) => {
 })
 
 
-const deliveryScene = new Scenes.WizardScene('deliveryScene', orderType, firstName, number, address, requestGeo, paymentChoice, sendMsgToChanel )
+const deliveryScene = new Scenes.WizardScene('deliveryScene', payment, orderType, firstName, number, address, requestGeo, paymentChoice, sendMsgToChanel )
 
 
 module.exports = deliveryScene
