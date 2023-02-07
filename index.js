@@ -191,6 +191,27 @@ bot.action('menu', ctx => {
 })
 //_____________________MENU END
 
+
+
+
+
+
+
+
+bot.hears('🚗Доставка', async (ctx) => {
+    await ctx.scene.enter('delivertyScene')
+})
+
+
+
+
+
+
+
+
+
+
+
 //_________CALLBACK QUERY________________________
 bot.on('callback_query', async (ctx) => {
     try {
@@ -280,7 +301,16 @@ ${tappedProduct.content ? 'Состав: ' + tappedProduct.content : ''}`,
                     sum = sum/100*95
                     discount = 5
                 }
-                await ctx.replyWithHTML(`🛍<b>Ваш заказ:</b> \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️ ${cart.filter(item => item.count>=1).map(item => '\n'+ "◽" + item.title +  ' - ['+item.count+'*'+item.price+'|'+item.count*item.price+']')} \n 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n <b>💳 Общая сумма: ₽${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)}</b>\nСкидка: <b>${discount}%</b>\n<b><ins>Итог:</ins> ₽${Math.round(sum)}</b>`, Markup.inlineKeyboard([
+                await ctx.replyWithHTML(`
+🛍<b>Ваш заказ:</b> 
+〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️ 
+${cart.filter(item => item.count>=1).map(item => '\n'+ "◽" + item.title +  ' - ['+item.count+'*'+item.price+'| '+item.count*item.price+']')} 
+〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
+<b>💳 Общая сумма: ₽${ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)}</b>
+Скидка: <b>${discount}%</b>
+<b><ins>Итог:</ins> ₽${Math.round(sum)}</b>
+${sum>500?'<b>Бесплатная доставка по городу</b>':`<i>Для бесплатной доставки закажите товаров еще на ${500-sum}₽</i>`}
+`, Markup.inlineKeyboard([
                     [Markup.button.callback(`✅ Перейти к оплате`, 'submitOrder')],
                     [Markup.button.callback(`❌ Отменить заказ`, 'cancelOrder')],
                     [Markup.button.callback(`🔙В категории`, 'menu')]
@@ -289,7 +319,10 @@ ${tappedProduct.content ? 'Состав: ' + tappedProduct.content : ''}`,
         }                                                                                                                                                
         if (data === 'submitOrder' && ctx.session.cart.length>0) {
             await ctx.answerCbQuery()
-            await ctx.scene.enter('orderScene')
+            await ctx.replyWithHTML('Выберите способ доставки', Markup.keyboard([
+                ['🚗Доставка', '🙋‍♂️Самовывоз'],
+                ['📝МЕНЮ']
+            ]).resize())
         } else await ctx.answerCbQuery()
     } catch (error) {
         console.log(error.message);
