@@ -12,7 +12,6 @@ const CAFE_ADDRESS = btns.CAFE_ADDRESS
 // const GARNISH_MEAL_IDS = products.filter(item => item.garnish).map(item => item.id)
 
 //+++++++++++++++++++++
-const orderScene = require('./orderScene');
 const deliveryScene = require('./scenes/deliveryScene');
 const onplaceScene = require('./scenes/onplaceScene');
 const stage = new Scenes.Stage([deliveryScene, onplaceScene])
