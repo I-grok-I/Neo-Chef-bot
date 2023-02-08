@@ -9,7 +9,7 @@ const STOPLIST = btns.STOPLIST
 const CAFE_NUM = btns.CAFE_NUM
 const CAFE_ADDRESS = btns.CAFE_ADDRESS
 
-// const GARNISH_MEAL_IDS = products.filter(item => item.garnish).map(item => item.id)
+// const GARNISH_MEAL_IDS = products.filter(item => item.garnish).map(item => item.id) 
 
 //+++++++++++++++++++++
 const deliveryScene = require('./scenes/deliveryScene');
