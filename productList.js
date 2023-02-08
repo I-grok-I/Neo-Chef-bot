@@ -328,7 +328,7 @@ const productList = [
     {id: 'creamIce', title: 'Сливочное мороженое', content: '', price: 70, categoryId: 'iceCream', category: 'мороженое', count: null, photo_id: ''},
     {id: 'bananaIce', title: 'Банановое мороженое', content: '', price: 70, categoryId: 'iceCream', category: 'мороженое', count: null, photo_id: ''},
     {id: 'assortiIce', title: 'Ассорти мороженое', content: '', price: 70, categoryId: 'iceCream', category: 'мороженое', count: null, photo_id: ''},
-    {id: 'bread', title: 'Хлеб', content: '', price: 10, categoryId: 'bread', category: 'хлеб', count: null, photo_id: ''},
+    {id: 'bread', title: 'Хлеб', content: '', price: 10, categoryId: 'bakery', category: 'хлеб', count: null, photo_id: ''},
 
     
         // FREE GARNISH MEAL

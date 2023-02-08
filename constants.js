@@ -49,7 +49,7 @@ if ((date.getHours()+3) < 12) {
         [Markup.button.callback('кофе карта', 'coffee')],
         [Markup.button.callback('фреш', 'fresh'), Markup.button.callback('компоты', 'compotes'),Markup.button.callback('напитки', 'drinks')],
         [Markup.button.callback('коктейли', 'cocktails'),Markup.button.callback('лимонады', 'lemonade')],
-        [Markup.button.callback('хлеб', 'bread')],
+        [Markup.button.callback('хлеб', 'bakery')],
     ]
     module.exports.categoryBtns = categoryBtns
 } else if ((date.getHours()+3) > 12) {
@@ -65,7 +65,7 @@ if ((date.getHours()+3) < 12) {
         [Markup.button.callback('кофе карта', 'coffee')],
         [Markup.button.callback('фреш', 'fresh'), Markup.button.callback('компоты', 'compotes'),Markup.button.callback('напитки', 'drinks')],
         [Markup.button.callback('коктейли', 'cocktails'),Markup.button.callback('лимонады', 'lemonade')],
-        [Markup.button.callback('хлеб', 'bread')],
+        [Markup.button.callback('хлеб', 'bakery')],
     ]
     module.exports.categoryBtns = categoryBtns
 }
