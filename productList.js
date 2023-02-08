@@ -328,6 +328,8 @@ const productList = [
     {id: 'creamIce', title: 'Сливочное мороженое', content: '', price: 70, categoryId: 'iceCream', category: 'мороженое', count: null, photo_id: ''},
     {id: 'bananaIce', title: 'Банановое мороженое', content: '', price: 70, categoryId: 'iceCream', category: 'мороженое', count: null, photo_id: ''},
     {id: 'assortiIce', title: 'Ассорти мороженое', content: '', price: 70, categoryId: 'iceCream', category: 'мороженое', count: null, photo_id: ''},
+    {id: 'bread', title: 'Хлеб', content: '', price: 10, categoryId: 'bread', category: 'хлеб', count: null, photo_id: ''},
+
     
         // FREE GARNISH MEAL
         {id: 'cknFileMundir', title: 'Куриное филе на гриле с картофелем в мундире', content: 'Куриное филе, запеченый картофель в мундире, кетчуп, лук маринованный', price: 330, categoryId: 'CknGrillGarnish', category: 'блюда с гарниром', count: null, photo_id: 'AgACAgIAAxkBAAIu8WPemuQXELMbLo72yKHpBcprjAwaAALgtDEbFB3ISm3Ua54DGlvoAQADAgADeQADLgQ'},
