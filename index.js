@@ -70,7 +70,7 @@ bot.action(constants.GARNISH_MEAL_IDS, async (ctx) => {
              [Markup.button.callback('Картофель в мундире', `${ctx.match}Mundir`)],
              [Markup.button.callback('Картофельное пюре', `${ctx.match}Pure`)],
              [Markup.button.callback('Картофель по-деревенски', `${ctx.match}Village`)],
-             [Markup.button.callback('🔙Назад', `${ctx.match}`)],
+             [Markup.button.callback('🔙Назад', `${products.find(item => item.id == ctx.match).categoryId}`)],
             ]})
     } catch (error) {
         console.log(error.message);
