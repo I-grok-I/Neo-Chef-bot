@@ -1,4 +1,4 @@
-const productList = [
+const productList = [ 
     {id: 'engBfast', title: 'Английский завтрак', content: 'Сосиски вареные, омлет, помидор, огурец, сметана, творог', price: 220, categoryId: 'breakfasts', category: 'Завтраки до 12:00', count: null, photo_id: 'AgACAgIAAxkBAAIukmPelcGmDs4p7WC_vFgtMbj39OCqAAKdyDEbyjj4SuIYqA0b2dCOAQADAgADeQADLgQ'},
     {id: 'dagBfast', title: 'Дагестанский завтрак', content: 'Калмыцкий чай, сыр, пышки, картошка, помидор, огурец, масло сливочное', price: 200, categoryId: 'breakfasts', category: 'Завтраки до 12:00', count: null, photo_id: 'AgACAgIAAxkBAAIulGPeldgv2PpNVEJlPE4RQyt9fJi5AALjwzEbMCLpScVgo1mcvKQOAQADAgADeQADLgQ'},
     {id: 'bavarBfast', title: 'Баварский завтрак', content: 'Сосиски жареные, глазунья, микс салата, помидор, огурец, сметана, творог', price: 230, categoryId: 'breakfasts', category: 'Завтраки до 12:00', count: null, photo_id: 'AgACAgIAAxkBAAIulmPelfdEpp3sWcTnMAJLQwYpGZo7AALjtDEbFB3ISmveobVBR4yZAQADAgADeQADLgQ'},
