@@ -421,14 +421,12 @@ module.exports.lemonade = lemonade
 
 
 const drinks = [
-    [Markup.button.callback('↓ ____Cola____ ↓', 'coldCoffeBtn')],
-    [Markup.button.callback('0.33л', 'Cola1'),Markup.button.callback('0.5л', 'Cola2'),Markup.button.callback('0.9л', 'Cola3')],
-    [Markup.button.callback('↓ ____Pepsi____ ↓', 'coldCoffeBtn')],
-    [Markup.button.callback('0.33л', 'Pepsi1'),Markup.button.callback('0.5л', 'Pepsi2'),Markup.button.callback('0.9л', 'Pepsi3')],
-    [Markup.button.callback('↓ ____Fanta____ ↓', 'coldCoffeBtn')],
-    [Markup.button.callback('0.33л', 'Fanta1'),Markup.button.callback('0.5л', 'Fanta2'),Markup.button.callback('0.9л', 'Fanta3')],
-    [Markup.button.callback('↓ ____Sprite____ ↓', 'coldCoffeBtn')],
-    [Markup.button.callback('0.33л', 'Sprite1'),Markup.button.callback('0.5л', 'Sprite2'),Markup.button.callback('0.9л', 'Sprite3')],
+    [Markup.button.callback('↓ __Добрый Cola__ ↓', 'coldCoffeBtn')],
+    [Markup.button.callback('0.33л', 'Cola1'), Markup.button.callback('0.5л', 'Cola2'),Markup.button.callback('0.9л', 'Cola3')],
+    [Markup.button.callback('↓ __Добрый Fanta__ ↓', 'coldCoffeBtn')],
+    [Markup.button.callback('0.33л', 'Fanta1'),Markup.button.callback('0.9л', 'Fanta3')],
+    [Markup.button.callback('↓ __Добрый Sprite__ ↓', 'coldCoffeBtn')],
+    [Markup.button.callback('0.33л', 'Sprite1'),Markup.button.callback('0.9л', 'Sprite3')],
     [Markup.button.callback('Cola Стекло', 'colaGlass')],
     [Markup.button.callback('Сок "Вико"', 'viko')],
     [Markup.button.callback('Сок Добрый/Любимый', 'dobry')],
