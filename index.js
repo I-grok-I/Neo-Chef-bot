@@ -3,13 +3,10 @@ require('dotenv').config();
 const bot = new Telegraf('5856492718:AAFYH9lDst1Jy1Itou4EINFXUwYTpUoBDUo');
 const productList = require('./productList.js')
 const products = productList.productList
-const btns = require('./constants.js');
-const GARNISH_MEAL_IDS = btns.GARNISH_MEAL_IDS
-const STOPLIST = btns.STOPLIST
-const CAFE_NUM = btns.CAFE_NUM
-const CAFE_ADDRESS = btns.CAFE_ADDRESS
+const constants = require('./constants.js');
 
 
+//helloText
 
 //+++++++++++++++++++++
 const deliveryScene = require('./scenes/deliveryScene');
@@ -54,10 +51,6 @@ bot.action('rejected', async (ctx) => {
 bot.on("photo", async (ctx) => {
     try {
         if (ctx.message.from.username == 'I_grok') {
-
-        const captionPhoto = ctx.message.caption;
-        const captionEntitiesPhoto = ctx.message.caption_entities;
-        const chat_id = 859134174
         const fileIdPhoto = ctx.message.photo[ctx.message.photo.length-1].file_id;
         return ctx.replyWithHTML(`${fileIdPhoto}`);
         }
@@ -68,7 +61,7 @@ bot.on("photo", async (ctx) => {
 
 
 //действия при нажатии на блюда с выбором гарнира
-bot.action(GARNISH_MEAL_IDS, async (ctx) => {
+bot.action(constants.GARNISH_MEAL_IDS, async (ctx) => {
     try {
         await ctx.editMessageText('Выберите гарнир')
         await ctx.editMessageReplyMarkup({inline_keyboard:[ 
@@ -92,7 +85,7 @@ bot.action('drinks', async (ctx) => {
     try {
         await ctx.answerCbQuery();
         await ctx.deleteMessage();
-        await ctx.replyWithHTML('<b>Напитки:</b>',Markup.inlineKeyboard(btns.drinks));
+        await ctx.replyWithHTML('<b>Напитки:</b>',Markup.inlineKeyboard(constants.drinks));
     } catch (error) {
         console.log(error.message);
     }
@@ -125,7 +118,7 @@ bot.action(products.map(product => product.categoryId), async (ctx) => {
 bot.start((ctx) => {
     try {
         ctx.replyWithHTML(
-btns.helloText, 
+        constants.helloText, 
         Markup.keyboard(
             [
                 ['📝МЕНЮ'],['🛒КОРЗИНА']
@@ -143,7 +136,7 @@ bot.hears('📝МЕНЮ', async (ctx) => { //при нажатии на 📝МЕ
         await ctx.reply('Нео Шеф', Markup.keyboard([
             ['📝МЕНЮ'],['🛒КОРЗИНА']
         ]).resize())
-        await ctx.reply('Выберите категорию', Markup.inlineKeyboard(btns.categoryBtns))
+        await ctx.reply('Выберите категорию', Markup.inlineKeyboard(constants.categoryBtns))
     } catch (error) {
         console.log(error.message);
     }
@@ -189,7 +182,7 @@ bot.action('menu', ctx => {
     try {
         ctx.answerCbQuery()
         ctx.deleteMessage()
-        ctx.reply('Выберите продукт', Markup.inlineKeyboard(btns.categoryBtns))
+        ctx.reply('Выберите продукт', Markup.inlineKeyboard(constants.categoryBtns))
     } catch (error) {
         console.log(error.message);
     }
@@ -347,13 +340,13 @@ ${sum>500?'\n<b>Бесплатная доставка по городу</b>':`\n
 //________________________________CALLBACK QUERY_____END
 
 bot.command('stoplist', async (ctx) => {
-    await ctx.reply(STOPLIST)
+    await ctx.reply(constants.STOPLIST)
 })
 bot.command('num', async (ctx) => {
-    await ctx.replyWithHTML(`${CAFE_NUM}`)
+    await ctx.replyWithHTML(`${constants.CAFE_NUM}`)
 })
 bot.command('add', async (ctx) => {
-    await ctx.replyWithHTML(`${CAFE_ADDRESS}`)
+    await ctx.replyWithHTML(`${constants.CAFE_ADDRESS}`)
 })
 
 
