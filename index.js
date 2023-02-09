@@ -92,7 +92,7 @@ bot.action('drinks', async (ctx) => {
     try {
         await ctx.answerCbQuery();
         await ctx.deleteMessage();
-        await ctx.replyWithHTML('<b>_______НАПИТКИ:_______</b>',Markup.inlineKeyboard(btns.drinks));
+        await ctx.replyWithHTML('<b>Напитки:</b>',Markup.inlineKeyboard(btns.drinks));
     } catch (error) {
         console.log(error.message);
     }
