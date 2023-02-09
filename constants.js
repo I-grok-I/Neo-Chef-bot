@@ -29,7 +29,9 @@ module.exports.helloText = helloText
 const STOPLIST = `Блюда, которые на данный момент находятся в стоп-листе:`
 module.exports.STOPLIST = STOPLIST
 
-const CAFE_NUM = `По всем вопросам вы можете обращаться по номеру <pre><b>89283090099</b></pre>`
+const CAFE_NUM = `
+По всем вопросам вы можете обращаться по номеру <pre><b>+79283090099</b></pre>
+Либо <a href="https://t.me/NeoChef2">напишите нам в telegram</a>`
 module.exports.CAFE_NUM = CAFE_NUM
 
 const CAFE_ADDRESS = `Адрес: <b>ул. Тотурбиева 133</b>\n Работаем с 9:00 до 23:00`

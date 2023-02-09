@@ -9,7 +9,7 @@ const STOPLIST = btns.STOPLIST
 const CAFE_NUM = btns.CAFE_NUM
 const CAFE_ADDRESS = btns.CAFE_ADDRESS
 
-// const GARNISH_MEAL_IDS = products.filter(item => item.garnish).map(item => item.id) 
+
 
 //+++++++++++++++++++++
 const deliveryScene = require('./scenes/deliveryScene');
@@ -50,7 +50,7 @@ bot.action('rejected', async (ctx) => {
 
 
         
-
+//возвращает id фотки, которую я отправил
 bot.on("photo", async (ctx) => {
     try {
         if (ctx.message.from.username == 'I_grok') {
@@ -65,7 +65,7 @@ bot.on("photo", async (ctx) => {
         console.log(error.message);
     }
 });
-//price
+
 
 //действия при нажатии на блюда с выбором гарнира
 bot.action(GARNISH_MEAL_IDS, async (ctx) => {
@@ -229,7 +229,7 @@ bot.hears('🙋‍♂️Самовывоз', async (ctx) => {
 
 
 
-//_________CALLBACK QUERY________________________
+//То, что происходит при нажатии на продукт, при нажатии на "+", "-", "корзина", "подтвердить заказ", "отменить заказ"______
 bot.on('callback_query', async (ctx) => {
     try {
         ctx.session ??= { cart: [] };
@@ -364,27 +364,4 @@ process.once('SIGTERM', () => bot.stop('SIGTERM'));
                 
                 
 
-                // bot.on("message", async (ctx) => {
-                    
-                    //     const captionPhoto = 'my cap'
-                    //     const captionEntitiesPhoto = ctx.message.caption_entities;
-                    //     const fileIdPhoto = 'AgACAgIAAxkBAAIQXGPDm2WtW_hd53yyPOojK8YqCOF0AAIPxjEboMYgSp0wA3Q0mrVaAQADAgADeQADLQQ'
-                    
-                    //     await ctx.telegram.sendPhoto(ctx.chat.id, fileIdPhoto, {
-                        //         caption: captionPhoto,
-                        //         reply_markup:{
-                            //             inline_keyboard:[
-                                //                 [{text:"Hii",callback_data:"Byy"}]
-                                //             ]
-                                //         }
-                                //     });
-                                // });
                                 
-                                
-                // bot.hears('delete', (ctx) =>{
-                //     let k = 0;
-                //     for(let i = 0; i <= 100; i++ ){
-                //         k =  ctx.message.message_id-i;
-                //         ctx.deleteMessage(k)
-                 //     }
-                // })
