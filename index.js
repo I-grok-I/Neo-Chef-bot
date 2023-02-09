@@ -22,7 +22,7 @@ bot.use(stage.middleware());
 
 
 
-//Хэндлеры для канала. То, что будет происходить при нажатии на "Оплачен" или "Отклонён"
+//Хэндлеры для канала. То, что будет происходить при нажатии на "Оплачен" или "Отклонён" Меню
 bot.action('accepted', async (ctx) => {
     try {
         await ctx.answerCbQuery()
@@ -77,7 +77,7 @@ bot.action(GARNISH_MEAL_IDS, async (ctx) => {
              [Markup.button.callback('Картофель в мундире', `${ctx.match}Mundir`)],
              [Markup.button.callback('Картофельное пюре', `${ctx.match}Pure`)],
              [Markup.button.callback('Картофель по-деревенски', `${ctx.match}Village`)],
-             [Markup.button.callback('Назад', 'cknMeal')],
+             [Markup.button.callback('🔙Назад', 'cknMeal')],
             ]})
     } catch (error) {
         console.log(error.message);
@@ -179,7 +179,7 @@ bot.hears('🛒КОРЗИНА', async ctx => {
 ${sum>500?'\n<b>Бесплатная доставка по городу</b>':`\n<i>Для бесплатной доставки закажите товаров еще на ${500-sum}₽</i>`}`, Markup.inlineKeyboard([
             [Markup.button.callback(`✅ Перейти к оплате`, 'submitOrder')],
             [Markup.button.callback(`❌ Отменить заказ`, 'cancelOrder')],
-            [Markup.button.callback(`🔙В категории`, 'menu')]
+            [Markup.button.callback(`📝Меню`, 'menu')]
         ]))  }
     } catch (error) {
         console.log(error.message);
@@ -329,7 +329,7 @@ ${sum>500?'\n<b>Бесплатная доставка по городу</b>':`\n
 `, Markup.inlineKeyboard([
                     [Markup.button.callback(`✅ Перейти к оплате`, 'submitOrder')],
                     [Markup.button.callback(`❌ Отменить заказ`, 'cancelOrder')],
-                    [Markup.button.callback(`🔙В категории`, 'menu')]
+                    [Markup.button.callback(`📝Меню`, 'menu')]
                 ]))  
             }
         }                                                                                                                                                

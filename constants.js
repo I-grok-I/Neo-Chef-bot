@@ -30,7 +30,7 @@ const STOPLIST = `Блюда, которые на данный момент на
 module.exports.STOPLIST = STOPLIST
 
 const CAFE_NUM = `
-По всем вопросам вы можете обращаться по номеру <pre><b>+79283090099</b></pre>
+По всем вопросам вы можете обращаться по номеру +79283090099
 Либо <a href="https://t.me/NeoChef2">напишите нам в telegram</a>`
 module.exports.CAFE_NUM = CAFE_NUM
 
