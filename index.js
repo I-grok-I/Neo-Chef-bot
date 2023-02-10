@@ -141,8 +141,11 @@ bot.hears('📝МЕНЮ', async (ctx) => { //при нажатии на 📝МЕ
         console.log(error.message);
     }
 })
-const date = new Date()
-bot.hears('a', ctx => ctx.reply(`${date.getUTCHours()+3}`))
+
+bot.hears('a', async (ctx) => {
+    const date = new Date()
+    await ctx.reply(`${date.getUTCHours()+3}`)
+})
 //enter
 bot.hears('🛒КОРЗИНА', async ctx => {
     try {
