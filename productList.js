@@ -74,6 +74,7 @@ const productList = [
     {id: 'cknShnizzel', title: 'Куриный шницель', content: 'Куриное филе, сухари панка, лук, грибы, сливки, гарнир на выбор', price: 350, categoryId: 'cknMeal', category: 'блюда из курицы', count: null, photo_id: 'AgACAgIAAxkBAAIu9GPemvK78zzZg5Dq-vgkXNXF0Dc9AALqtDEbFB3ISi8TRxoj8U_gAQADAgADeQADLgQ'},
     {id: 'julien', title: 'Жульен', content: 'куриное филе, грибы, лук, соус сливочный, сыр', price: 220, categoryId: 'cknMeal', category: 'блюда из курицы', count: null, photo_id: 'AgACAgIAAxkBAAIu9mPemvgmuHO_dHuOCYVYO85fltz2AAIZxDEbMCLpSUUGj-p-2aF_AQADAgADeQADLgQ'},
     {id: 'toriSet', title: 'Тори-сет', content: 'хрустящие куриные крыльшки, Гарнир на выбор.', price: 280, categoryId: 'cknMeal', category: 'блюда из курицы', count: null, photo_id: 'AgACAgIAAxkBAAIu-GPemvyyA0QDdGc-gpS0kdPSckv_AAIaxDEbMCLpSVdizlIolFpwAQADAgADeQADLgQ'},
+    {id: 'toriSetL', title: 'Тори-сет mini', content: 'хрустящие куриные крыльшки, Гарнир на выбор.', price: 230, categoryId: 'cknMeal', category: 'блюда из курицы', count: null, photo_id: 'AgACAgIAAxkBAAIu-GPemvyyA0QDdGc-gpS0kdPSckv_AAIaxDEbMCLpSVdizlIolFpwAQADAgADeQADLgQ'},
     {id: 'cknCream', title: 'Курица в сливочном соусе', content: 'Куриное филе, лук, грибы, соус сливочный, картофельное пюре, микс салат', price: 330, categoryId: 'cknMeal', category: 'блюда из курицы', count: null, photo_id: 'AgACAgIAAxkBAAIu-mPemwFFjhiJPHZC4JuZQFz-XD_nAAIbxDEbMCLpSZIJEI0QfG9yAQADAgADeQADLgQ'},
     {id: 'friedCkn', title: 'курица жареная', content: 'курица, лук маринованный,  на выбор', price: 300, categoryId: 'cknMeal', category: 'блюда из курицы', count: null, photo_id: 'AgACAgIAAxkBAAIu_GPemwYnTCwDrvZuntrNgWWoNwauAAIdxDEbMCLpSZvNhXDwcJSdAQADAgADeQADLgQ'},
     {id: 'arabCkn', title: 'курица по-арабски', content: 'куриное филе, майонез, сыр, грецкий орех, микс салат, гарнир на выбор', price: 310, categoryId: 'cknMeal', category: 'блюда из курицы', count: null, photo_id: 'AgACAgIAAxkBAAIu_2PemxDy1UGSJGu5yU_2dfK7BDB5AALitDEbFB3ISoUXq_vdT59HAQADAgADeQADLgQ'},
@@ -193,7 +194,8 @@ const productList = [
     {id: 'beefBrg', title: 'Beef бургер', content: 'мякоть говядины, лук репчатый, лук красный маринованный, огурцы свежие, помидор,лист салата с соусом барбекю', price: 240,  categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: 'AgACAgIAAxkBAAIvZ2PenwhfI4SDMNR66ieVEa2KwiJ5AAJixDEbMCLpSRNKhbqU5Vg4AQADAgADeQADLgQ'},
     {id: 'cknBrg', title: 'Бургер куриный', content: 'куриное мясо, лук репчатый, лук красный маринованный, огурцы свежие, помидор,лист салата с соусом', price: 200, categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: 'AgACAgIAAxkBAAIvZ2PenwhfI4SDMNR66ieVEa2KwiJ5AAJixDEbMCLpSRNKhbqU5Vg4AQADAgADeQADLgQ'},
     {id: 'telatinaBrg', title: 'Бургер из телятины', content: 'котлета, помидор, огурец соленый, лист салата, сыр, coyc', price: 220, categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: 'AgACAgIAAxkBAAIvZ2PenwhfI4SDMNR66ieVEa2KwiJ5AAJixDEbMCLpSRNKhbqU5Vg4AQADAgADeQADLgQ'},
-    {id: 'brgSet', title: 'Бургер в комплекте', content: 'бургер с курицей, бургер с телятиной, картошка фри, кока-кола 0,3 л', price: 320, categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: 'AgACAgIAAxkBAAIvZ2PenwhfI4SDMNR66ieVEa2KwiJ5AAJixDEbMCLpSRNKhbqU5Vg4AQADAgADeQADLgQ'},
+    {id: 'brgSet', title: 'Бургер в комплекте (курица)', content: 'бургер с курицей, картошка фри, кока-кола 0,3 л', price: 320, categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: 'AgACAgIAAxkBAAIvZ2PenwhfI4SDMNR66ieVEa2KwiJ5AAJixDEbMCLpSRNKhbqU5Vg4AQADAgADeQADLgQ'},
+    {id: 'brgSet', title: 'Бургер в комплекте (телятина)', content: 'бургер с телятиной, картошка фри, кока-кола 0,3 л', price: 350, categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: 'AgACAgIAAxkBAAIvZ2PenwhfI4SDMNR66ieVEa2KwiJ5AAJixDEbMCLpSRNKhbqU5Vg4AQADAgADeQADLgQ'},
     {id: 'naggets', title: 'Наггетсы 6 шт', content: '', price: 230, categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: 'AgACAgIAAxkBAAIvaWPenwxJ3tot0NZgIpF7hX_8U8G6AAJkxDEbMCLpSbD-dvKMOcuBAQADAgADeQADLgQ'},
     //GARNIERS
     {id: 'potatoMundir', title: 'Картофель в мундире', content: 'Гарнир "Картофель в мундире"', price: 120,  categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: ''},
@@ -201,7 +203,6 @@ const productList = [
     {id: 'free', title: 'Фри соломинкой', content: 'Гарнир "Фри соломинкой"', price: 120, categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: ''},
     {id: 'mash', title: 'Картофельное пюре', content: 'Гарнир "Картофельное пюре"', price: 120, categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: ''},
     {id: 'rise', title: 'Рис', content: 'Гарнир "рис"', price: 120, categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: ''},
-    //SPICES
     {id: 'bbqSause', title: 'Соус барбекю', content: '', price: 45, categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: ''},
     {id: 'caesarSause', title: 'Соус цезарь', content: '', price: 45, categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: ''},
     {id: 'kimchiSause', title: 'Соус кимчи', content: '', price: 45, categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: ''},
@@ -211,7 +212,7 @@ const productList = [
     {id: 'ketchupChili', title: 'Кетчуп чили', content: '', price: 30, categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: ''},
     {id: 'ketchupHeinz', title: 'Кетчуп heinz', content: '', price: 35, categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: ''},
     {id: 'shashlykSause', title: 'Соус шашлычный', content: '', price: 35, categoryId: 'fastFood', category: 'фастфуд', count: null, photo_id: ''},
-//DESSERTS 
+    //DESSERTS 
     {id: 'sourCreamPancakes', title: 'Блины со сметаной', content: '', price: 180, categoryId: 'desserts', category: 'десерты', count: null, photo_id: ''},
     {id: 'chokoPancakes', title: 'Блины с шоколадной пастой', content: '', price: 180, categoryId: 'desserts', category: 'десерты', count: null, photo_id: ''},
     {id: 'strawberryPancakes', title: 'Блины с клубничным джемом', content: '', price: 180, categoryId: 'desserts', category: 'десерты', count: null, photo_id: ''},
@@ -349,6 +350,12 @@ const productList = [
         {id: 'toriSetFree', title: 'Тори-сет с фри соломинкой', content: 'хрустящие куриные крыльшки, Гарнир на выбор.', price: 280, categoryId: 'toriSetGarnish', category: 'блюда с гарниром', count: null, photo_id: 'AgACAgIAAxkBAAIu-GPemvyyA0QDdGc-gpS0kdPSckv_AAIaxDEbMCLpSVdizlIolFpwAQADAgADeQADLgQ'},
         {id: 'toriSetVillage', title: 'Тори-сет с картофелем по-деревенски', content: 'хрустящие куриные крыльшки, Гарнир на выбор.', price: 280, categoryId: 'toriSetGarnish', category: 'блюда с гарниром', count: null, photo_id: 'AgACAgIAAxkBAAIu-GPemvyyA0QDdGc-gpS0kdPSckv_AAIaxDEbMCLpSVdizlIolFpwAQADAgADeQADLgQ'},
         {id: 'toriSetRise', title: 'Тори-сет с рисом', content: 'хрустящие куриные крыльшки, Гарнир на выбор.', price: 280, categoryId: 'toriSetGarnish', category: 'блюда с гарниром', count: null, photo_id: 'AgACAgIAAxkBAAIu-GPemvyyA0QDdGc-gpS0kdPSckv_AAIaxDEbMCLpSVdizlIolFpwAQADAgADeQADLgQ'},
+        //tori-set mini
+        {id: 'toriSetLMundir', title: 'Тори-сет mini с картофелем в мундире', content: 'хрустящие куриные крыльшки, Гарнир на выбор.', price: 230, categoryId: 'toriSetGarnish', category: 'блюда с гарниром', count: null, photo_id: 'AgACAgIAAxkBAAIu-GPemvyyA0QDdGc-gpS0kdPSckv_AAIaxDEbMCLpSVdizlIolFpwAQADAgADeQADLgQ'},
+        {id: 'toriSetLPure', title: 'Тори-сет mini с картофельным пюре', content: 'хрустящие куриные крыльшки, Гарнир на выбор.', price: 230, categoryId: 'toriSetGarnish', category: 'блюда с гарниром', count: null, photo_id: 'AgACAgIAAxkBAAIu-GPemvyyA0QDdGc-gpS0kdPSckv_AAIaxDEbMCLpSVdizlIolFpwAQADAgADeQADLgQ'},
+        {id: 'toriSetLFree', title: 'Тори-сет mini с фри соломинкой', content: 'хрустящие куриные крыльшки, Гарнир на выбор.', price: 230, categoryId: 'toriSetGarnish', category: 'блюда с гарниром', count: null, photo_id: 'AgACAgIAAxkBAAIu-GPemvyyA0QDdGc-gpS0kdPSckv_AAIaxDEbMCLpSVdizlIolFpwAQADAgADeQADLgQ'},
+        {id: 'toriSetLVillage', title: 'Тори-сет mini с картофелем по-деревенски', content: 'хрустящие куриные крыльшки, Гарнир на выбор.', price: 230, categoryId: 'toriSetGarnish', category: 'блюда с гарниром', count: null, photo_id: 'AgACAgIAAxkBAAIu-GPemvyyA0QDdGc-gpS0kdPSckv_AAIaxDEbMCLpSVdizlIolFpwAQADAgADeQADLgQ'},
+        {id: 'toriSetLRise', title: 'Тори-сет mini с рисом', content: 'хрустящие куриные крыльшки, Гарнир на выбор.', price: 230, categoryId: 'toriSetGarnish', category: 'блюда с гарниром', count: null, photo_id: 'AgACAgIAAxkBAAIu-GPemvyyA0QDdGc-gpS0kdPSckv_AAIaxDEbMCLpSVdizlIolFpwAQADAgADeQADLgQ'},
        
         {id: 'friedCknMundir', title: 'Курица жареная с картофелем в мундире', content: 'курица, лук маринованный,  на выбор', price: 300, categoryId: 'friedCknGarnish', category: 'блюда с гарниром', count: null, photo_id: 'AgACAgIAAxkBAAIu_GPemwYnTCwDrvZuntrNgWWoNwauAAIdxDEbMCLpSZvNhXDwcJSdAQADAgADeQADLgQ'},
         {id: 'friedCknPure', title: 'Курица жареная с картофельным пюре', content: 'курица, лук маринованный,  на выбор', price: 300, categoryId: 'friedCknGarnish', category: 'блюда с гарниром', count: null, photo_id: 'AgACAgIAAxkBAAIu_GPemwYnTCwDrvZuntrNgWWoNwauAAIdxDEbMCLpSZvNhXDwcJSdAQADAgADeQADLgQ'},
