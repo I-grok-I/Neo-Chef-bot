@@ -39,8 +39,8 @@ module.exports.CAFE_NUM = CAFE_NUM
 const CAFE_ADDRESS = `Адрес: <b>ул. Тотурбиева 133</b>\n Работаем с 9:00 до 23:00`
 module.exports.CAFE_ADDRESS = CAFE_ADDRESS
 
-const date = new Date();
-if ((date.getHours()+3) < 12) {
+
+if ((new Date().getHours()+3) < 12) {
     const categoryBtns = [ 
         [Markup.button.callback('завтраки до 12', 'breakfasts'),Markup.button.callback('салаты', 'salads'),Markup.button.callback('супы', 'soups')],
         [Markup.button.callback('блюда на грилле-углях', 'bbq')],
@@ -56,7 +56,7 @@ if ((date.getHours()+3) < 12) {
         [Markup.button.callback('хлеб', 'bakery')],
     ]
     module.exports.categoryBtns = categoryBtns
-} else if ((date.getHours()+3) > 12) {
+} else if ((new Date().getHours()+3) > 12) {
     const categoryBtns = [ 
         [Markup.button.callback('салаты', 'salads'),Markup.button.callback('супы', 'soups')],
         [Markup.button.callback('блюда на грилле-углях', 'bbq')],
