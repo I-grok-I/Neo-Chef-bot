@@ -6,7 +6,7 @@ const products = productList.productList
 const GARNISH_MEAL_IDS = [
 'cknFile',    'cknShnizzel',
 'friedCkn',   'friedCknL',
-'toriSet',    'torisetL',   
+'toriSet',    'toriSetL',   
 'arabCkn',    'arabCknL',
 'frenchCkn',  'frenchCknL',
 'arabBeef',   'frenchBeef',
