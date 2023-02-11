@@ -144,8 +144,14 @@ bot.hears('📝МЕНЮ', async (ctx) => { //при нажатии на 📝МЕ
 
 bot.hears('a', async (ctx) => {
     const date = new Date()
-    await ctx.reply(`${date.getUTCHours()+3}`)
-    await ctx.reply(`${date}`)
+    await ctx.reply(`
+date.getUTCHours()+3 = ${date.getUTCHours()+3}
+date.getUTCHours()+5 = ${date.getUTCHours()+5}
+date.getHours()+3 = ${date.getHours()+3}
+date.getHours()+5 = ${date.getHours()+3}
+((new Date()).getUTCHours()+3) = ${((new Date()).getUTCHours()+3)}`)
+
+    
 })
 //enter
 bot.hears('🛒КОРЗИНА', async ctx => {
