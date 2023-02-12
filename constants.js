@@ -30,7 +30,7 @@ module.exports.helloText = helloText
 
 const STOPLIST = `Блюда, которые на данный момент находятся в стоп-листе:`
 module.exports.STOPLIST = STOPLIST
-//
+///ss
 const CAFE_NUM = `
 По всем вопросам вы можете обращаться по номеру +79283090099
 Либо <a href="https://t.me/NeoChef2">напишите нам в telegram</a>`
