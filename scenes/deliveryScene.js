@@ -173,11 +173,7 @@ paymentChoice.on('message', async (ctx) => {
         }
         let sum = cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
                 let discount = 0
-                const date = new Date();
-                if ((date.getUTCHours()+3) >= 20 && (date.getUTCHours()+3) < 24) {
-                    sum*= 0.85
-                    discount = 15
-                } else if (sum >=500 && sum <1000) {
+                if (sum >=500 && sum <1000) {
                     sum = sum/100*97
                     discount = 3
                 } else if (sum >=1000) {
@@ -224,11 +220,7 @@ sendMsgToChanel.on('callback_query', async (ctx) => {
             // console.log(ctx.callbackQuery)
             let sum = ctx.session.cart.reduce((acc, curr)=> {return acc+=curr.price*curr.count}, 0)
                 let discount = 0
-                const date = new Date();
-                if ((date.getUTCHours()+3) >= 20 && (date.getUTCHours()+3) < 24) {
-                    sum*= 0.85
-                    discount = 15
-                } else if (sum >=500 && sum <1000) {
+                if (sum >=500 && sum <1000) {
                     sum = sum/100*97
                     discount = 3
                 } else if (sum >=1000) {
