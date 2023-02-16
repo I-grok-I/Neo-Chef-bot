@@ -50,7 +50,7 @@ bot.action('rejected', async (ctx) => {
 //возвращает id фотки, которую я отправил
 bot.on("photo", async (ctx) => {
     try {
-        if (ctx.message.from.username == 'I_grok') {
+        if (ctx.message.from.username == 'i_grok') {
         const fileIdPhoto = ctx.message.photo[ctx.message.photo.length-1].file_id;
         return ctx.replyWithHTML(`${fileIdPhoto}`);
         }
