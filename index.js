@@ -143,10 +143,8 @@ bot.hears('📝МЕНЮ', async (ctx) => { //при нажатии на 📝МЕ
 })
 
 bot.hears('a', async (ctx) => {
-    let date = new Date((new Date).getTime()) 
-    await ctx.reply(`${date.getUTCHours()+3}`)
-
-    
+    let date = new Date()
+    await ctx.reply(`${date.getHours()+3}`);
 })
 //enter
 bot.hears('🛒КОРЗИНА', async ctx => {
