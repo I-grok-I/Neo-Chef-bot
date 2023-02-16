@@ -19,7 +19,7 @@ bot.use(stage.middleware());
 
 
 
-//Хэндлеры для канала. То, что будет происходить при нажатии на "Оплачен" или "Отклонён" Меню
+//Хэндлеры для канала. То, что будет происходить при нажатии на "Оплачен" или "Отклонён" Меню category
 bot.action('accepted', async (ctx) => {
     try {
         await ctx.answerCbQuery()
@@ -136,7 +136,7 @@ bot.hears('📝МЕНЮ', async (ctx) => { //при нажатии на 📝МЕ
         await ctx.reply('Нео Шеф', Markup.keyboard([
             ['📝МЕНЮ'],['🛒КОРЗИНА']
         ]).resize())
-        await ctx.reply('Выберите категорию', Markup.inlineKeyboard(constants.categoryBtns))
+        await ctx.reply('Выберите категорию', Markup.inlineKeyboard(constants.categoryBtns()))
     } catch (error) {
         console.log(error.message);
     }
@@ -183,7 +183,7 @@ bot.action('menu', ctx => {
     try {
         ctx.answerCbQuery()
         ctx.deleteMessage()
-        ctx.reply('Выберите продукт', Markup.inlineKeyboard(constants.categoryBtns))
+        ctx.reply('Выберите продукт', Markup.inlineKeyboard(constants.categoryBtns()))
     } catch (error) {
         console.log(error.message);
     }
