@@ -47,7 +47,7 @@ bot.action('rejected', async (ctx) => {
 
 
         
-//возвращает id фотки, которую я отправил
+//возвращает id фоткии, которую я отправил
 bot.on("photo", async (ctx) => {
     try {
         if (ctx.message.from.username == 'i_grok') {

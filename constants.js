@@ -52,7 +52,7 @@ if ((date.getUTCHours()+3) < 12) {
         [Markup.button.callback('хлеб', 'bakery')],
     ]
     module.exports.categoryBtns = categoryBtns
-} else { //
+} else { //ыыы
     const categoryBtns = [ 
         [Markup.button.callback('салаты', 'salads'),Markup.button.callback('супы', 'soups')],
         [Markup.button.callback('блюда на грилле-углях', 'bbq')],
