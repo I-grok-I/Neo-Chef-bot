@@ -136,7 +136,7 @@ bot.hears('📝МЕНЮ', async (ctx) => { //при нажатии на 📝МЕ
         await ctx.reply('Нео Шеф', Markup.keyboard([
             ['📝МЕНЮ'],['🛒КОРЗИНА']
         ]).resize())
-        await ctx.reply('Выберите категорию', Markup.inlineKeyboard(constants.categoryBtns()))
+        await ctx.reply('Выберите категорию', Markup.inlineKeyboard(constants.getMenu()))
     } catch (error) {
         console.log(error.message);
     }
@@ -183,7 +183,7 @@ bot.action('menu', ctx => {
     try {
         ctx.answerCbQuery()
         ctx.deleteMessage()
-        ctx.reply('Выберите продукт', Markup.inlineKeyboard(constants.categoryBtns()))
+        ctx.reply('Выберите продукт', Markup.inlineKeyboard(constants.getMenu()))
     } catch (error) {
         console.log(error.message);
     }

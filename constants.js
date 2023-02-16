@@ -35,44 +35,46 @@ module.exports.CAFE_NUM = CAFE_NUM
 
 const CAFE_ADDRESS = `Адрес: <b>ул. Тотурбиева 133</b>\n Работаем с 9:00 до 23:00`
 module.exports.CAFE_ADDRESS = CAFE_ADDRESS
-const categoryBtns = () => {
-    let date = new Date((new Date).getTime()) 
-    if ((date.getUTCHours()+3) < 12) {
-        const categoryBtns = [ 
-            [Markup.button.callback('завтраки до 12', 'breakfasts'),Markup.button.callback('салаты', 'salads'),Markup.button.callback('супы', 'soups')],
-            [Markup.button.callback('блюда на грилле-углях', 'bbq')],
-            [Markup.button.callback('шашлык', 'shashlyk'),Markup.button.callback('фастфуд', 'fastFood'), Markup.button.callback('пицца', 'pizza')],
-            [Markup.button.callback('тёплые роллы', 'warmRolls')],
-            [Markup.button.callback('холодные роллы', 'coldRls')],
-            [Markup.button.callback('курица', 'cknMeal'), Markup.button.callback('рыба', 'fishMeal'),Markup.button.callback('телятина', 'beefMeal')],
-            [Markup.button.callback('паста', 'pasta')],
-            [Markup.button.callback('мороженое', 'iceCream'),Markup.button.callback('десерты', 'desserts')],
-            [Markup.button.callback('кофе карта', 'coffee')],
-            [Markup.button.callback('фреш', 'fresh'), Markup.button.callback('компоты', 'compotes'),Markup.button.callback('напитки', 'drinks')],
-            [Markup.button.callback('коктейли', 'cocktails'),Markup.button.callback('лимонады', 'lemonade')],
-            [Markup.button.callback('хлеб', 'bakery')],
-        ]
-        return categoryBtns
-    } else { //ыыы
-        const categoryBtns = [ 
-            [Markup.button.callback('салаты', 'salads'),Markup.button.callback('супы', 'soups')],
-            [Markup.button.callback('блюда на грилле-углях', 'bbq')],
-            [Markup.button.callback('шашлык', 'shashlyk'),Markup.button.callback('фастфуд', 'fastFood'), Markup.button.callback('пицца', 'pizza')],
-            [Markup.button.callback('тёплые роллы', 'warmRolls')],
-            [Markup.button.callback('холодные роллы', 'coldRls')],
-            [Markup.button.callback('курица', 'cknMeal'), Markup.button.callback('рыба', 'fishMeal'),Markup.button.callback('телятина', 'beefMeal')],
-            [Markup.button.callback('паста', 'pasta')],
-            [Markup.button.callback('мороженое', 'iceCream'),Markup.button.callback('десерты', 'desserts')],
-            [Markup.button.callback('кофе карта', 'coffee')],
-            [Markup.button.callback('фреш', 'fresh'), Markup.button.callback('компоты', 'compotes'),Markup.button.callback('напитки', 'drinks')],
-            [Markup.button.callback('коктейли', 'cocktails'),Markup.button.callback('лимонады', 'lemonade')],
-            [Markup.button.callback('хлеб', 'bakery')],
-        ]
-        return categoryBtns
-    }
-    
+const getMenu = () => {
+    let date = new Date()  
+    if ((date.getHours()+3) < 12) {
+        return categoryBtns1
+    } else return categoryBtns2
 }
-module.exports.categoryBtns() = categoryBtns()
+module.exports.getMenu = getMenu
+
+    const categoryBtns1 = [ 
+        [Markup.button.callback('завтраки до 12', 'breakfasts'),Markup.button.callback('салаты', 'salads'),Markup.button.callback('супы', 'soups')],
+        [Markup.button.callback('блюда на грилле-углях', 'bbq')],
+        [Markup.button.callback('шашлык', 'shashlyk'),Markup.button.callback('фастфуд', 'fastFood'), Markup.button.callback('пицца', 'pizza')],
+        [Markup.button.callback('тёплые роллы', 'warmRolls')],
+        [Markup.button.callback('холодные роллы', 'coldRls')],
+        [Markup.button.callback('курица', 'cknMeal'), Markup.button.callback('рыба', 'fishMeal'),Markup.button.callback('телятина', 'beefMeal')],
+        [Markup.button.callback('паста', 'pasta')],
+        [Markup.button.callback('мороженое', 'iceCream'),Markup.button.callback('десерты', 'desserts')],
+        [Markup.button.callback('кофе карта', 'coffee')],
+        [Markup.button.callback('фреш', 'fresh'), Markup.button.callback('компоты', 'compotes'),Markup.button.callback('напитки', 'drinks')],
+        [Markup.button.callback('коктейли', 'cocktails'),Markup.button.callback('лимонады', 'lemonade')],
+        [Markup.button.callback('хлеб', 'bakery')],
+    ]
+
+
+    const categoryBtns2 = [ 
+        [Markup.button.callback('салаты', 'salads'),Markup.button.callback('супы', 'soups')],
+        [Markup.button.callback('блюда на грилле-углях', 'bbq')],
+        [Markup.button.callback('шашлык', 'shashlyk'),Markup.button.callback('фастфуд', 'fastFood'), Markup.button.callback('пицца', 'pizza')],
+        [Markup.button.callback('тёплые роллы', 'warmRolls')],
+        [Markup.button.callback('холодные роллы', 'coldRls')],
+        [Markup.button.callback('курица', 'cknMeal'), Markup.button.callback('рыба', 'fishMeal'),Markup.button.callback('телятина', 'beefMeal')],
+        [Markup.button.callback('паста', 'pasta')],
+        [Markup.button.callback('мороженое', 'iceCream'),Markup.button.callback('десерты', 'desserts')],
+        [Markup.button.callback('кофе карта', 'coffee')],
+        [Markup.button.callback('фреш', 'fresh'), Markup.button.callback('компоты', 'compotes'),Markup.button.callback('напитки', 'drinks')],
+        [Markup.button.callback('коктейли', 'cocktails'),Markup.button.callback('лимонады', 'lemonade')],
+        [Markup.button.callback('хлеб', 'bakery')],
+    ]
+
+
 
 //
 const breakfasts = [
