@@ -149,7 +149,7 @@ const productList = [
     {id: 'forel', title: 'Форель', content: '', price: 450, categoryId: 'shashlyk', category: 'шашлык', count: null, photo_id: ''},
     {id: 'som', title: 'Рыба сом', content: '', price: 400, categoryId: 'shashlyk', category: 'шашлык', count: null, photo_id: ''},
     {id: 'turkeyBbq', title: 'Шашлык из индейки', content: '', price: 420, categoryId: 'shashlyk', category: 'шашлык', count: null, photo_id: ''},
-    {id: 'assortiShashlyk', title: 'Шашлык ассорти с рисом', content: 'Баранина пистолеты, корейка, грибы,помидор, курица, телятина, люля куриные, фокачча', price: 1900, categoryId: 'shashlyk', category: 'шашлык', count: null, photo_id: 'AgACAgIAAxkBAAJLN2P6Cr0fXTXw2Md23w7q1YT0HvT1AALJyDEbaVjRS1yT_wG6iCscAQADAgADeQADLgQ'},
+    {id: 'assortiShashlyk', title: 'Шашлык ассорти с рисом', content: 'баранина, телятина, куриный шашлык, крылышки, люля кебаб, помидор, зелень, рис', price: 1900, categoryId: 'shashlyk', category: 'шашлык', count: null, photo_id: 'AgACAgIAAxkBAAJLN2P6Cr0fXTXw2Md23w7q1YT0HvT1AALJyDEbaVjRS1yT_wG6iCscAQADAgADeQADLgQ'},
     {id: 'sajBig', title: 'Садж большой', content: 'Баранина пистолеты, корейка, грибы,помидор, курица, телятина, люля куриные, фокачча', price: 2500, categoryId: 'shashlyk', category: 'шашлык', count: null, photo_id: 'AgACAgIAAxkBAAIvQmPem9SeTXQFN0glbGw1y9lrFfb-AAJHxDEbMCLpSZxf17COwR5sAQADAgADeQADLgQ'},
     {id: 'sajSmall', title: 'Садж маленький', content: 'Грибы, помидор, крылышки, люля куриные, корейка, люля кебаб, курица, фокачча', price: 2000, categoryId: 'shashlyk', category: 'шашлык', count: null, photo_id: 'AgACAgIAAxkBAAIvQmPem9SeTXQFN0glbGw1y9lrFfb-AAJHxDEbMCLpSZxf17COwR5sAQADAgADeQADLgQ'},
     //WARM ROLLS
